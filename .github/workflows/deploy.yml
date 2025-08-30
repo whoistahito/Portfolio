@@ -3,21 +3,33 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: # Allow manual triggering
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -28,7 +40,11 @@ jobs:
       - name: Add SPA fallback (404.html)
         run: cp dist/index.html dist/404.html
 
+      - name: Add .nojekyll file
+        run: touch dist/.nojekyll
+
       - name: Deploy to gh-pages
+        id: deployment
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -36,3 +52,4 @@ jobs:
           publish_branch: gh-pages
           cname: sabinehansen.art
           enable_jekyll: false
+          force_orphan: true
