@@ -1,0 +1,5 @@
+run website:
+npm run dev
+
+go live:
+git push heroku main
