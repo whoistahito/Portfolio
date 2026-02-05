@@ -1,86 +1,18 @@
 //
-import {ContactSection} from "../components/ContactSection";
-import {useEffect, useState} from "react";
-import ContactSectionMobile from "../components/ContactSectionMobile";
-import CalendarBig from "../assets/optimized/lg/calendar_big.webp";
-import Map, { Marker } from 'react-map-gl/mapbox';
-import 'mapbox-gl/dist/mapbox-gl.css';
 
-interface Address {
-    name: string;
-    street: string;
-    city: string;
-    zipCode: string;
-    googleMapsUrl: string;
-    lat?: number;
-    lng?: number;
+import { useEffect, useState } from "react";
+
+// Placeholder for Instagram icon
+function InstagramIcon({ className = "" }: { className?: string }) {
+    return (
+        <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="12" fill="#fff"/>
+            <rect x="10" y="10" width="28" height="28" rx="8" stroke="#000" strokeWidth="2"/>
+            <circle cx="24" cy="24" r="7" stroke="#000" strokeWidth="2"/>
+            <circle cx="33" cy="15" r="2" fill="#000"/>
+        </svg>
+    );
 }
-
-const addresses: Address[] = [
-    {
-        name: "Giesecke Licht+Design",
-        street: "Zum See 4-6",
-        city: "Schwentinental-Raisdorf",
-        zipCode: "24223",
-        googleMapsUrl: "https://maps.google.com/?q=Giesecke+Licht+Design,Zum+See+1-3,24223+Schwentinental-Raisdorf",
-        lat: 54.283,
-        lng: 10.225,
-    },
-    {
-        name: "auroraprint",
-        street: "Preetzer Chaussee 144",
-        city: "Kiel-Elmschenhagen",
-        zipCode: "24146",
-        googleMapsUrl: "https://maps.google.com/?q=auroraprint,Preetzer+Chaussee+144,24146+Kiel-Elmschenhagen",
-        lat: 54.290,
-        lng: 10.180,
-    },
-    {
-        name: "Hafensinne",
-        street: "Kleiner Kuhberg 36",
-        city: "Kiel (Exerzierplatz)",
-        zipCode: "24103",
-        googleMapsUrl: "https://maps.google.com/?q=Hafensinne,Kleiner+Kuhberg+36,24103+Kiel",
-        lat: 54.320,
-        lng: 10.130,
-    },
-    {
-        name: "Mercedes-Autohaus Klenk",
-        street: "Suchskrug 6",
-        city: "Kiel",
-        zipCode: "24107",
-        googleMapsUrl: "https://maps.google.com/?q=Mercedes-Autohaus+Klenk,Suchskrug+6,24107+Kiel",
-        lat: 54.340,
-        lng: 10.080,
-    },
-    {
-        name: "Buchhandlung am Markt",
-        street: "Lange Brückstr. 1a",
-        city: "Preetz",
-        zipCode: "24211",
-        googleMapsUrl: "https://maps.google.com/?q=Buchhandlung+am+Markt,Lange+Brückstr.+1a,24211+Preetz",
-        lat: 54.235,
-        lng: 10.285,
-    },
-    {
-        name: "Sparkasse Lütjenburg",
-        street: "Markt 15",
-        city: "Lütjenburg",
-        zipCode: "24321",
-        googleMapsUrl: "https://maps.google.com/?q=Sparkasse+Lütjenburg,Markt+15,24321+Lütjenburg",
-        lat: 54.295,
-        lng: 10.585,
-    },
-    {
-        name: "KitiPrints",
-        street: "Online" ,
-        city: "Etsy-Shop",
-        zipCode: "",
-        googleMapsUrl: "https://www.etsy.com/de-en/shop/KitiPrints?ref=shop_profile&listing_id=4397423814&section_id=56484241",
-
-    },
-];
-
 
 export function Updates(): JSX.Element {
     const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
@@ -92,174 +24,165 @@ export function Updates(): JSX.Element {
         return () => window.removeEventListener("resize", onResize);
     }, []);
 
-    if (isMobile) {
+    // Desktop layout
+    if (!isMobile) {
         return (
-            <div className="bg-[#d4cdc4] flex flex-col items-center w-screen min-h-screen">
-                {/* header is rendered globally */}
+            <main className="relative w-full min-h-screen bg-[#D3CCC3] font-[Antonio] text-black overflow-x-hidden">
+                {/* Language bar */}
+                <div className="absolute top-2 right-16 flex gap-2 text-[16px] font-light tracking-tight">
+                    <span className="cursor-pointer">de</span>
+                    <span>|</span>
+                    <span className="cursor-pointer">en</span>
+                </div>
 
-                <div className="bg-[#d4cdc4] w-full max-w-[390px] flex flex-col items-center pt-32 pb-10 px-4">
+                {/* Header bar (assumed global, not duplicated) */}
 
-                    {/* Title */}
-                    <div className="w-full mb-6">
-                        <h1 className="[font-family:'Antonio',Helvetica] font-thin text-black text-2xl text-center tracking-[0] leading-8">
-                            Der Kunstkalender 2026 ist da!
-                        </h1>
+                {/* Main content */}
+                <div className="relative w-full max-w-[1440px] mx-auto" style={{ minHeight: 2674 }}>
+                    {/* News 1 */}
+                    <div className="absolute left-[74px] top-[225px] w-[600px]">
+                        <h2 className="font-normal text-[40px] leading-[150%] mb-8">AUSSTELLUNG VOM WERDEN UND WACHSEN</h2>
+                        <p className="font-thin text-[32px] leading-[150%] text-justify mb-8" style={{height: 300}}>Am 4. März 2026 findet ab 18 Uhr in der Förde Sparkasse in Lütjenburg meine Vernissage statt.</p>
+                        <div className="absolute left-[0px] top-[350px] w-[600px]">
+                        <p className="font-normal text-[24px] leading-[150%] text-justify" style={{height: 161}}>Markt 15, 24321 Lütjenburg<br />Seiteneingang am Bürgerbrunnen</p>
+                        </div>
+                        <div className="absolute left-[260px] top-[503px] w-[350px] h-[62px] flex items-center justify-center border-2 border-[#854686] rounded-[36px]">
+                            <span className="font-semibold text-[32px] tracking-[0.1em]">04.03. – 14.04.2026</span>
+                        </div>
+                    </div>
+                    {/* Image News 1 */}
+                    <div className="absolute left-[711px] top-[240px] w-[633px] h-[550px] bg-[#7476BC] rounded-[8px]" />
+
+                    {/* Line 4 */}
+                    <div className="absolute left-[36px] top-[890px] w-[1367px] border-t border-[#636263]" />
+
+                    {/* Image News 2 */}
+                    <div className="absolute left-[72px] top-[970px] w-[837px] h-[485px] bg-[#C6A4CC] rounded-[8px]" />
+
+                    {/* News 2 */}
+                    <div className="absolute left-[72px] top-[1470px] right-[531px]">
+                        <h2 className="font-normal text-[40px] leading-[150%] mb-2">AUSSTELLUNG XX</h2>
+                    </div>
+                    <div className="absolute left-[72px] top-[1555px] right-[531px]">
+                        <p className="font-thin text-[24px] leading-[150%] text-justify" style={{height: 161}}>laslslsls</p>
+                    </div>
+                    {/* Date 2 */}
+                    <div className="absolute left-[665px] top-[1836px] w-[244px] h-[62px] flex items-center justify-center border-2 border-[#854686] rounded-[36px]">
+                        <span className="font-semibold text-[32px] tracking-[0.1em]">28.02.2026</span>
                     </div>
 
-                    {/* Images */}
-                    <div className="flex flex-col gap-6 mb-6">
-                        <img className="w-[199px] h-[257px] object-cover" alt="Kunstkalender April"
-                             src={CalendarBig}/>
+                    {/* Image News 3 */}
+                    <div className="absolute left-[980px] top-[970px] w-[396px] h-[370px] bg-[#E99348] rounded-[8px] flex items-center justify-center">
+                        {/* Replace with <img src=... /> if you have the image */}
+                        <span className="text-white text-xl font-bold">Kalender-Bild</span>
                     </div>
 
-                    {/* Description Text */}
-                    <div
-                        className="w-full [font-family:'Antonio',Helvetica] font-thin text-black text-base text-center tracking-[0] leading-6 mb-6">
-                        In zwei Varianten gibt es ihn: im A3-Format als Wandkalender (29 Euro) oder als kleinen
-                            Tischkalender in einer Box (15 Euro) <br/> <br/>
-                            Für jeden verkauften Kalender geht eine Spende an das Frauenhaus Kreis Plön.<br/>
-                        <br/>
+                    {/* Title News 3 */}
+                    <div className="absolute left-[980px] top-[1355px] w-[396px]">
+                        <h3 className="font-normal text-[39px] leading-[150%] mb-2">KUNSTKALENDER VERFÜGBAR</h3>
+                    </div>
+                    {/* Text News 3 */}
+                    <div className="absolute left-[980px] top-[1440px] w-[396px]">
+                        <p className="font-thin text-[24px] leading-[150%] text-justify" style={{height: 314}}>lalalala</p>
+                        <span className="text-[#854686] underline cursor-pointer">Mehr Infos</span>
                     </div>
 
-                    {/* Address List */}
-                    <div className="w-full mb-6">
-                        <h3 className="[font-family:'Antonio',Helvetica] font-thin text-black text-xl text-center mb-4">Verkaufsstellen</h3>
-                        <div className="flex flex-col gap-3">
-                            {addresses.map((addr, idx) => (
-                                <a
-                                    key={idx}
-                                    href={addr.googleMapsUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-3 bg-white rounded-lg shadow-sm border border-gray-200 active:shadow-md active:border-gray-300 transition-all block"
-                                >
-                                    <p className="font-medium text-sm text-black">{addr.name}</p>
-                                    {addr.street && <p className="text-sm text-gray-700 mt-1">{addr.street}</p>}
-                                    {addr.zipCode && <p className="text-sm text-gray-700">{addr.zipCode} {addr.city}</p>}
-                                </a>
-                            ))}
+                    {/* Contact block */}
+                    <div className="absolute left-1/2 top-[2170px] w-[560px] h-[311px] -translate-x-1/2 flex flex-col items-center justify-center">
+                        <div className="text-center font-normal text-[48px] leading-[120%] mb-8">Sabine Hansen<br/>Schwentinental, Deutschland<br/>kontakt@sabinehansen.art</div>
+                        <div className="flex justify-center w-full">
+                            <InstagramIcon className="w-16 h-16" />
                         </div>
                     </div>
 
-                    {/* Map */}
-                    <div className="w-full h-[300px] mb-6 rounded-lg overflow-hidden border border-gray-200">
-                        <Map
-                            initialViewState={{
-                                longitude: 10.2,
-                                latitude: 54.3,
-                                zoom: 9
-                            }}
-                            style={{width: '100%', height: '100%'}}
-                            mapStyle="mapbox://styles/mapbox/streets-v11"
-                            mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
-                        >
-                            {addresses.map((addr, idx) => (
-                                addr.lat && addr.lng ? (
-                                    <Marker
-                                        key={idx}
-                                        longitude={addr.lng}
-                                        latitude={addr.lat}
-                                        color="red"
-                                        onClick={(e) => {
-                                            e.originalEvent.stopPropagation();
-                                            window.open(addr.googleMapsUrl, '_blank');
-                                        }}
-                                        style={{cursor: 'pointer'}}
-                                    />
-                                ) : null
-                            ))}
-                        </Map>
-                    </div>
-
-                    <div className="w-full flex flex-col items-start">
-                        <ContactSectionMobile className="mt-6 w-full"/>
-                    </div>
+                    {/* Footer bar */}
+                    <footer className="absolute left-0 bottom-0 w-full flex items-center justify-between px-8 py-2 text-[16px] font-normal">
+                        <div className="flex gap-4">
+                            <span>Sabine Hansen © 2025</span>
+                            <span>Impressum</span>
+                            <span>Datenschutz</span>
+                        </div>
+                        <span>2025</span>
+                    </footer>
                 </div>
-            </div>
+            </main>
         );
     }
 
-
-    // Desktop markup preserved below
+    // Mobile layout
     return (
-        <div className="min-h-screen bg-background text-foreground flex flex-col">
-            {/* header is rendered globally */}
+        <main className="relative w-full min-h-screen bg-[#D3CCC3] font-[Antonio] text-black overflow-x-hidden">
+            {/* Language bar */}
+            <div className="absolute top-2 right-4 flex gap-2 text-[12px] font-light tracking-tight">
+                <span className="cursor-pointer">de</span>
+                <span>|</span>
+                <span className="cursor-pointer">en</span>
+            </div>
+
             {/* Main content */}
-            <main className="flex-1 w-full">
-                <div className="w-full max-w-[1440px] mx-auto" style={{marginTop: 0, paddingTop: 0}}>
-                    <div className="w-full max-w-4xl mx-auto px-6 pt-52 pb-6">
-                        <h1 className="text-4xl font-thin font-['Antonio'] text-black mb-6 text-center">Der
-                            Kunstkalender 2026 ist da!</h1>
+            <div className="relative w-full max-w-[430px] mx-auto" style={{ minHeight: 900 }}>
+                {/* Exhibition 1 */}
+                <div className="absolute left-[16px] top-[60px] w-[220px]">
+                    <h2 className="font-normal text-[24px] leading-[150%] mb-1">AUSSTELLUNG XX</h2>
+                    <p className="font-thin text-[14px] leading-[150%] text-justify mb-4" style={{height: 120}}>{bio1}</p>
+                    <div className="absolute left-[120px] top-[140px] w-[90px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px]">
+                        <span className="font-semibold text-[16px] tracking-[0.1em]">28.02.2026</span>
                     </div>
-
-                    <div className="flex flex-wrap justify-center gap-8 mb-6">
-                        <img className="w-90 h-[600px] object-contain" src={CalendarBig} alt="Kunstkalender 2026 April"
-                             loading="lazy"/>
-                    </div>
-
-                    <div className="w-full max-w-4xl mx-auto px-6 pb-12">
-                        <p className="text-lg font-thin text-black mb-6 text-center">
-                            In zwei Varianten gibt es ihn: im A3-Format als Wandkalender (29 Euro) oder als kleinen
-                            Tischkalender in einer Box (15 Euro) <br/> <br/>
-                            Für jeden verkauften Kalender geht eine Spende an das Frauenhaus Kreis Plön.
-                        </p>
-                        <br/>
-
-                        {/* Address List */}
-                        <div className="mb-12">
-                            <h3 className="text-xl font-thin font-['Antonio'] text-black mb-6 text-center"> Verkaufsstellen</h3>
-                            <div className="flex flex-wrap justify-center gap-4">
-                                {addresses.map((addr, idx) => (
-                                    <a
-                                        key={idx}
-                                        href={addr.googleMapsUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="p-4 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md hover:border-gray-300 transition-all cursor-pointer block w-full md:w-[calc(50%-0.5rem)]"
-                                    >
-                                        <p className="font-medium text-sm text-black">{addr.name}</p>
-                                        <p className="text-sm text-gray-700 mt-2">{addr.street}</p>
-                                        <p className="text-sm text-gray-700">{addr.zipCode} {addr.city}</p>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Map */}
-                        <div className="w-full h-[400px] mb-12 rounded-lg overflow-hidden border border-gray-200">
-                            <Map
-                                initialViewState={{
-                                    longitude: 10.2,
-                                    latitude: 54.3,
-                                    zoom: 9
-                                }}
-
-                                style={{width: '100%', height: '100%'}}
-                                mapStyle="mapbox://styles/mapbox/streets-v11"
-                                mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
-                            >
-                                {addresses.map((addr, idx) => (
-                                    addr.lat && addr.lng ? (
-                                        <Marker
-                                            key={idx}
-                                            longitude={addr.lng}
-                                            latitude={addr.lat}
-                                            color="red"
-                                            onClick={(e) => {
-                                                e.originalEvent.stopPropagation();
-                                                window.open(addr.googleMapsUrl, '_blank');
-                                            }}
-                                            style={{cursor: 'pointer'}}
-                                        />
-                                    ) : null
-                                ))}
-                            </Map>
-                        </div>
-                    </div>
-
-                    <ContactSection className="relative w-full max-w-2xl mx-auto px-6"/>
                 </div>
-            </main>
-        </div>
+                {/* Rectangle 9 */}
+                <div className="absolute left-[250px] top-[60px] w-[140px] h-[140px] bg-[#7476BC] rounded-[4px]" />
+
+                {/* Line 4 */}
+                <div className="absolute left-[8px] top-[220px] w-[410px] border-t border-[#636263]" style={{transform: 'rotate(-0.12deg)'}} />
+
+                {/* Rectangle 10 */}
+                <div className="absolute left-[16px] top-[250px] w-[220px] h-[120px] bg-[#C6A4CC] rounded-[4px]" />
+
+                {/* Calendar image (placeholder) */}
+                <div className="absolute left-[250px] top-[250px] w-[140px] h-[130px] bg-[#E99348] rounded-[4px] flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">Kalender-Bild</span>
+                </div>
+
+                {/* KUNSTKALENDER VERFÜGBAR */}
+                <div className="absolute left-[250px] top-[390px] right-[16px]">
+                    <h3 className="font-normal text-[18px] leading-[150%] mb-1">KUNSTKALENDER VERFÜGBAR</h3>
+                </div>
+                {/* Calendar text */}
+                <div className="absolute left-[250px] top-[420px] right-[16px]">
+                    <p className="font-thin text-[12px] leading-[150%] text-justify" style={{height: 80}}>{bio2}</p>
+                    <span className="text-[#854686] underline cursor-pointer text-xs">Mehr Infos</span>
+                </div>
+
+                {/* Exhibition 2 */}
+                <div className="absolute left-[16px] top-[420px] right-[170px]">
+                    <h2 className="font-normal text-[18px] leading-[150%] mb-1">AUSSTELLUNG XX</h2>
+                </div>
+                <div className="absolute left-[16px] top-[440px] right-[170px]">
+                    <p className="font-thin text-[12px] leading-[150%] text-justify" style={{height: 60}}>{bio1}</p>
+                </div>
+                {/* Date 2 */}
+                <div className="absolute left-[120px] top-[500px] w-[90px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px]">
+                    <span className="font-semibold text-[16px] tracking-[0.1em]">04.03.2026</span>
+                </div>
+
+                {/* Contact block */}
+                <div className="absolute left-1/2 top-[600px] w-[250px] h-[100px] -translate-x-1/2 flex flex-col items-center justify-center">
+                    <div className="text-center font-normal text-[20px] leading-[120%] mb-4">Sabine Hansen<br/>Schwentinental, Deutschland<br/>kontakt@sabinehansen.art</div>
+                    <div className="flex justify-center w-full">
+                        <InstagramIcon className="w-8 h-8" />
+                    </div>
+                </div>
+
+                {/* Footer bar */}
+                <footer className="absolute left-0 bottom-0 w-full flex items-center justify-between px-4 py-1 text-[12px] font-normal">
+                    <div className="flex gap-2">
+                        <span>Sabine Hansen © 2025</span>
+                        <span>Impressum</span>
+                        <span>Datenschutz</span>
+                    </div>
+                    <span>2025</span>
+                </footer>
+            </div>
+        </main>
     );
 }
