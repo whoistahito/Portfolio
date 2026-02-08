@@ -12,6 +12,7 @@ import { LanguageProvider } from "./lib/LanguageContext";
 import { SiteHeader } from "./components/SiteHeader";
 import { FooterBar } from "./components/FooterBar";
 import { Updates } from "./screens/updates.tsx";
+import { UpdatesCalendar2026 } from "./screens/calendar-2026.tsx";
 
 // desktop-only routes (mobile variants removed)
 
@@ -30,7 +31,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
         <Route path="/imprint" element={<Imprint />} />
         <Route path="/exhibitions" element={<Exhebitions />} />
         <Route path="/updates" element={<Updates />} />
-
+        <Route path="/updates/calendar-2026" element={<UpdatesCalendar2026 />} />
 
       </Routes>
       {/* Global footer: centered on mobile, shifted left on desktop using flex */}

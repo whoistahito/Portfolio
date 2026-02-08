@@ -1,6 +1,9 @@
 //
 
-import { useEffect, useState } from "react";
+import { ContactSection } from "../components/ContactSection";
+import { useEffect, useState, useRef } from "react";
+import ContactSectionMobile from "../components/ContactSectionMobile";
+import News3 from "../assets/optimized/sm/News3.webp";
 
 // Placeholder for Instagram icon
 function InstagramIcon({ className = "" }: { className?: string }) {
@@ -41,17 +44,21 @@ export function Updates(): JSX.Element {
                 <div className="relative w-full max-w-[1440px] mx-auto" style={{ minHeight: 2674 }}>
                     {/* News 1 */}
                     <div className="absolute left-[74px] top-[225px] w-[600px]">
-                        <h2 className="font-normal text-[40px] leading-[150%] mb-8">AUSSTELLUNG VOM WERDEN UND WACHSEN</h2>
-                        <p className="font-thin text-[32px] leading-[150%] text-justify mb-8" style={{height: 300}}>Am 4. März 2026 findet ab 18 Uhr in der Förde Sparkasse in Lütjenburg meine Vernissage statt.</p>
-                        <div className="absolute left-[0px] top-[350px] w-[600px]">
-                        <p className="font-normal text-[24px] leading-[150%] text-justify" style={{height: 161}}>Markt 15, 24321 Lütjenburg<br />Seiteneingang am Bürgerbrunnen</p>
+                        <h2 className="font-normal text-[40px] leading-[150%] mb-8">AUSSTELLUNG<br/>»VOM WERDEN UND WACHSEN«</h2>
+                        <p className="font-thin text-[28px] leading-[160%] text-justify mb-8" style={{height: 300}}>Die Ausstellung zeigt meinen künstlerischen Entwicklungs-prozess als lebendige Momentaufnahme eines fortlaufenden Wandels.<br/>Am 4. März 2026 findet hierfür ab 18 Uhr in der Förde Sparkasse in Lütjenburg meine Vernissage statt. Einlass ist ab 17:30 Uhr am Seiteneingang beim Bürgerbrunnen.</p>
+                        <div className="absolute left-[0px] top-[490px] w-[600px]">
+                        <p className="font-normal text-[24px] leading-[150%] text-justify" style={{height: 161}}>Markt 15<br/>24321 Lütjenburg</p>
                         </div>
                         <div className="absolute left-[260px] top-[503px] w-[350px] h-[62px] flex items-center justify-center border-2 border-[#854686] rounded-[36px]">
                             <span className="font-semibold text-[32px] tracking-[0.1em]">04.03. – 14.04.2026</span>
                         </div>
                     </div>
                     {/* Image News 1 */}
-                    <div className="absolute left-[711px] top-[240px] w-[633px] h-[550px] bg-[#7476BC] rounded-[8px]" />
+                    <img
+                        src={News3}
+                        alt="News 1"
+                        className="absolute left-[711px] top-[240px] w-[633px] h-[550px] bg-[#7476BC] rounded-[8px] object-cover"
+                    />
 
                     {/* Line 4 */}
                     <div className="absolute left-[36px] top-[890px] w-[1367px] border-t border-[#636263]" />
@@ -79,13 +86,34 @@ export function Updates(): JSX.Element {
 
                     {/* Title News 3 */}
                     <div className="absolute left-[980px] top-[1355px] w-[396px]">
-                        <h3 className="font-normal text-[39px] leading-[150%] mb-2">KUNSTKALENDER VERFÜGBAR</h3>
+                        <h3 className="font-normal text-[39px] leading-[150%] mb-2">KUNSTKALENDER 2026 ERHÄLTLICH</h3>
                     </div>
                     {/* Text News 3 */}
-                    <div className="absolute left-[980px] top-[1440px] w-[396px]">
-                        <p className="font-thin text-[24px] leading-[150%] text-justify" style={{height: 314}}>lalalala</p>
-                        <span className="text-[#854686] underline cursor-pointer">Mehr Infos</span>
+                    <div className="absolute left-[980px] top-[1500px] w-[396px]">
+                        <p className="font-thin text-[24px] leading-[150%] text-justify" style={{height: 314}}>Mein Kunstkalender 2026 ist ab sofort an verschiedenen Verkaufsstellen in Schleswig-Holstein sowie online erhältlich.</p>
                     </div>
+                    <span
+                        className="absolute text-[#854686] underline cursor-pointer"
+                        style={{
+                            top: 1640,
+                            left: 980,
+                            fontSize: 20,
+                        }}
+                        >
+                        Mehr Infos
+                        </span>
+                     <a
+                        href="/updates/calendar-2026"
+                        className="absolute text-[#854686] underline cursor-pointer"
+                        style={{
+                            top: 1650,
+                            left: 980,
+                            fontSize: 20,
+                        }}
+                        >
+                        Mehr Infos
+                     </a>
+   
 
                     {/* Contact block */}
                     <div className="absolute left-1/2 top-[2170px] w-[560px] h-[311px] -translate-x-1/2 flex flex-col items-center justify-center">

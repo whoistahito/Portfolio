@@ -82,7 +82,7 @@ const addresses: Address[] = [
 ];
 
 
-export function Updates(): JSX.Element {
+export function UpdatesCalendar2026(): JSX.Element {
     const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
 
     useEffect(() => {
