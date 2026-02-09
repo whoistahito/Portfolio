@@ -4,6 +4,8 @@ import { ContactSection } from "../components/ContactSection";
 import { useEffect, useState, useRef } from "react";
 import ContactSectionMobile from "../components/ContactSectionMobile";
 import News3 from "../assets/optimized/sm/News3.webp";
+import Calendar2026 from "../assets/optimized/lg/calendar_big.webp";
+import NachtderKunst from "../assets/optimized/sm/Updates-Nacht-der-Kultur.webp";
 
 // Placeholder for Instagram icon
 function InstagramIcon({ className = "" }: { className?: string }) {
@@ -45,7 +47,7 @@ export function Updates(): JSX.Element {
                     {/* News 1 */}
                     <div className="absolute left-[74px] top-[225px] w-[600px]">
                         <h2 className="font-normal text-[40px] leading-[150%] mb-8">AUSSTELLUNG<br/>»VOM WERDEN UND WACHSEN«</h2>
-                        <p className="font-thin text-[28px] leading-[160%] text-justify mb-8" style={{height: 300}}>Die Ausstellung zeigt meinen künstlerischen Entwicklungs-prozess als lebendige Momentaufnahme eines fortlaufenden Wandels.<br/>Am 4. März 2026 findet hierfür ab 18 Uhr in der Förde Sparkasse in Lütjenburg meine Vernissage statt. Einlass ist ab 17:30 Uhr am Seiteneingang beim Bürgerbrunnen.</p>
+                        <p className="font-thin text-[28px] leading-[160%] text-justify mb-8" style={{height: 300}}>Die Ausstellung zeigt meinen künstlerischen Entwicklungs-prozess als lebendige Momentaufnahme eines fortlaufenden Wandels.<br/>Am 4. März 2026 findet ab 18 Uhr in der Förde Sparkasse in Lütjenburg meine Vernissage statt. Einlass ist ab 17:30 Uhr am Seiteneingang beim Bürgerbrunnen.</p>
                         <div className="absolute left-[0px] top-[490px] w-[600px]">
                         <p className="font-normal text-[24px] leading-[150%] text-justify" style={{height: 161}}>Markt 15<br/>24321 Lütjenburg</p>
                         </div>
@@ -56,7 +58,7 @@ export function Updates(): JSX.Element {
                     {/* Image News 1 */}
                     <img
                         src={News3}
-                        alt="News 1"
+                        alt="News 3"
                         className="absolute left-[711px] top-[240px] w-[633px] h-[550px] bg-[#7476BC] rounded-[8px] object-cover"
                     />
 
@@ -64,25 +66,29 @@ export function Updates(): JSX.Element {
                     <div className="absolute left-[36px] top-[890px] w-[1367px] border-t border-[#636263]" />
 
                     {/* Image News 2 */}
-                    <div className="absolute left-[72px] top-[970px] w-[837px] h-[485px] bg-[#C6A4CC] rounded-[8px]" />
+                    <img src={NachtderKunst} alt="Nacht der Kunst" className="absolute left-[72px] top-[970px] w-[837px] h-[485px] rounded-[8px]" />
 
                     {/* News 2 */}
                     <div className="absolute left-[72px] top-[1470px] right-[531px]">
-                        <h2 className="font-normal text-[40px] leading-[150%] mb-2">AUSSTELLUNG XX</h2>
+                        <h2 className="font-normal text-[40px] leading-[150%] mb-2">NACHT DER KUNST- UND KULTURORTE <br/></h2>
                     </div>
                     <div className="absolute left-[72px] top-[1555px] right-[531px]">
-                        <p className="font-thin text-[24px] leading-[150%] text-justify" style={{height: 161}}>laslslsls</p>
+                        <p className="font-thin text-[24px] leading-[150%] text-justify" style={{height: 161}}>Am Samstag, den 28. Februar 2026, öffne ich mein Zuhause für die Öffentlichkeit von 18 bis 22 Uhr im Rahmen der Schwentinentaler Nacht der Kunst- und Kulturorte.<br/></p>
                     </div>
+                    <div className="absolute left-[72px] top-[1690px] w-[600px]">
+                        <p className="font-normal text-[24px] leading-[150%] text-justify" style={{height: 161}}>Elsa-Brandström-Straße 7<br/>24223 Schwentinental</p>
+                        </div>
                     {/* Date 2 */}
-                    <div className="absolute left-[665px] top-[1836px] w-[244px] h-[62px] flex items-center justify-center border-2 border-[#854686] rounded-[36px]">
+                    <div className="absolute left-[665px] top-[1698px] w-[244px] h-[62px] flex items-center justify-center border-2 border-[#854686] rounded-[36px]">
                         <span className="font-semibold text-[32px] tracking-[0.1em]">28.02.2026</span>
                     </div>
 
                     {/* Image News 3 */}
-                    <div className="absolute left-[980px] top-[970px] w-[396px] h-[370px] bg-[#E99348] rounded-[8px] flex items-center justify-center">
-                        {/* Replace with <img src=... /> if you have the image */}
-                        <span className="text-white text-xl font-bold">Kalender-Bild</span>
-                    </div>
+                    <img
+                        src={Calendar2026}
+                        alt="News 1"
+                        className="absolute left-[980px] top-[970px] w-[396px] h-[370px] bg-[#E99348] rounded-[8px] object-cover"> 
+                    </img>
 
                     {/* Title News 3 */}
                     <div className="absolute left-[980px] top-[1355px] w-[396px]">
@@ -92,21 +98,11 @@ export function Updates(): JSX.Element {
                     <div className="absolute left-[980px] top-[1500px] w-[396px]">
                         <p className="font-thin text-[24px] leading-[150%] text-justify" style={{height: 314}}>Mein Kunstkalender 2026 ist ab sofort an verschiedenen Verkaufsstellen in Schleswig-Holstein sowie online erhältlich.</p>
                     </div>
-                    <span
-                        className="absolute text-[#854686] underline cursor-pointer"
-                        style={{
-                            top: 1640,
-                            left: 980,
-                            fontSize: 20,
-                        }}
-                        >
-                        Mehr Infos
-                        </span>
                      <a
                         href="/updates/calendar-2026"
                         className="absolute text-[#854686] underline cursor-pointer"
                         style={{
-                            top: 1650,
+                            top: 1640,
                             left: 980,
                             fontSize: 20,
                         }}
@@ -152,7 +148,7 @@ export function Updates(): JSX.Element {
                 {/* Exhibition 1 */}
                 <div className="absolute left-[16px] top-[60px] w-[220px]">
                     <h2 className="font-normal text-[24px] leading-[150%] mb-1">AUSSTELLUNG XX</h2>
-                    <p className="font-thin text-[14px] leading-[150%] text-justify mb-4" style={{height: 120}}>{bio1}</p>
+                    <p className="font-thin text-[14px] leading-[150%] text-justify mb-4" style={{height: 120}}>lalal</p>
                     <div className="absolute left-[120px] top-[140px] w-[90px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px]">
                         <span className="font-semibold text-[16px] tracking-[0.1em]">28.02.2026</span>
                     </div>
@@ -177,7 +173,7 @@ export function Updates(): JSX.Element {
                 </div>
                 {/* Calendar text */}
                 <div className="absolute left-[250px] top-[420px] right-[16px]">
-                    <p className="font-thin text-[12px] leading-[150%] text-justify" style={{height: 80}}>{bio2}</p>
+                    <p className="font-thin text-[12px] leading-[150%] text-justify" style={{height: 80}}>lalal</p>
                     <span className="text-[#854686] underline cursor-pointer text-xs">Mehr Infos</span>
                 </div>
 
@@ -186,7 +182,7 @@ export function Updates(): JSX.Element {
                     <h2 className="font-normal text-[18px] leading-[150%] mb-1">AUSSTELLUNG XX</h2>
                 </div>
                 <div className="absolute left-[16px] top-[440px] right-[170px]">
-                    <p className="font-thin text-[12px] leading-[150%] text-justify" style={{height: 60}}>{bio1}</p>
+                    <p className="font-thin text-[12px] leading-[150%] text-justify" style={{height: 60}}>lalal</p>
                 </div>
                 {/* Date 2 */}
                 <div className="absolute left-[120px] top-[500px] w-[90px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px]">
