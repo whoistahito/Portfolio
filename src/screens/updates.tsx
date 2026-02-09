@@ -165,13 +165,7 @@ export function Updates(): JSX.Element {
 
   // Mobile layout
   return (
-    <div className="bg-[#d4cdc4] grid justify-items-center [align-items:start] w-screen min-h-screen pt-5">
-      {/* Language bar */}
-      <div className="fixed top-2 right-4 flex gap-2 text-[12px] font-light tracking-tight z-10 bg-[#D3CCC3] px-2 py-1 rounded">
-        <span className="cursor-pointer">de</span>
-        <span>|</span>
-        <span className="cursor-pointer">en</span>
-      </div>
+    <div className="bg-[#d4cdc4] grid justify-self-start [align-items:start] w-screen min-h-screen pt-5">
 
       {/* Main content */}
       <div className="translate-y-[90px] pb-8 px-4 gap-8">
