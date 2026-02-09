@@ -111,13 +111,8 @@ export function Updates(): JSX.Element {
                      </a>
    
 
-                    {/* Contact block */}
-                    <div className="absolute left-1/2 top-[2170px] w-[560px] h-[311px] -translate-x-1/2 flex flex-col items-center justify-center">
-                        <div className="text-center font-normal text-[48px] leading-[120%] mb-8">Sabine Hansen<br/>Schwentinental, Deutschland<br/>kontakt@sabinehansen.art</div>
-                        <div className="flex justify-center w-full">
-                            <InstagramIcon className="w-16 h-16" />
-                        </div>
-                    </div>
+                    {/* Contact block (global) */}
+                    <ContactSection className="absolute left-1/2 top-[2000px] w-full max-w-[560px] h-[311px] -translate-x-1/2 flex flex-col items-center justify-center" />
 
                     {/* Footer bar */}
                     <footer className="absolute left-0 bottom-0 w-full flex items-center justify-between px-8 py-2 text-[16px] font-normal">
@@ -189,13 +184,8 @@ export function Updates(): JSX.Element {
                     <span className="font-semibold text-[16px] tracking-[0.1em]">04.03.2026</span>
                 </div>
 
-                {/* Contact block */}
-                <div className="absolute left-1/2 top-[600px] w-[250px] h-[100px] -translate-x-1/2 flex flex-col items-center justify-center">
-                    <div className="text-center font-normal text-[20px] leading-[120%] mb-4">Sabine Hansen<br/>Schwentinental, Deutschland<br/>kontakt@sabinehansen.art</div>
-                    <div className="flex justify-center w-full">
-                        <InstagramIcon className="w-8 h-8" />
-                    </div>
-                </div>
+                {/* Contact block (global) */}
+                <ContactSectionMobile className="absolute left-1/2 top-[600px] w-full max-w-[250px] h-[100px] -translate-x-1/2 flex flex-col items-center justify-center" />
 
                 {/* Footer bar */}
                 <footer className="absolute left-0 bottom-0 w-full flex items-center justify-between px-4 py-1 text-[12px] font-normal">
