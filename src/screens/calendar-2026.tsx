@@ -186,7 +186,7 @@ export function UpdatesCalendar2026(): JSX.Element {
             {/* header is rendered globally */}
             {/* Main content */}
             <main className="flex-1 w-full">
-                <div className="w-full max-w-[1440px] mx-auto" style={{marginTop: 0, paddingTop: 0}}>
+                <div className="w-full max-w-[1440px] mx-auto" style={{ minHeight: 2474, marginTop: 0, paddingTop: 0}}>
                     <div className="w-full max-w-4xl mx-auto px-6 pt-52 pb-6">
                         <h1 className="text-4xl font-thin font-['Antonio'] text-black mb-6 text-center">Der
                             Kunstkalender 2026 ist da!</h1>

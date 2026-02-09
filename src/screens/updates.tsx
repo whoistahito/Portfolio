@@ -1,23 +1,11 @@
 //
 
 import { ContactSection } from "../components/ContactSection";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
 import ContactSectionMobile from "../components/ContactSectionMobile";
 import News3 from "../assets/optimized/sm/News3.webp";
 import Calendar2026 from "../assets/optimized/lg/calendar_big.webp";
 import NachtderKunst from "../assets/optimized/sm/Updates-Nacht-der-Kultur.webp";
-
-// Placeholder for Instagram icon
-function InstagramIcon({ className = "" }: { className?: string }) {
-    return (
-        <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="48" height="48" rx="12" fill="#fff"/>
-            <rect x="10" y="10" width="28" height="28" rx="8" stroke="#000" strokeWidth="2"/>
-            <circle cx="24" cy="24" r="7" stroke="#000" strokeWidth="2"/>
-            <circle cx="33" cy="15" r="2" fill="#000"/>
-        </svg>
-    );
-}
 
 export function Updates(): JSX.Element {
     const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
@@ -43,7 +31,7 @@ export function Updates(): JSX.Element {
                 {/* Header bar (assumed global, not duplicated) */}
 
                 {/* Main content */}
-                <div className="relative w-full max-w-[1440px] mx-auto" style={{ minHeight: 2674 }}>
+                <div className="relative w-full max-w-[1440px] mx-auto" style={{ minHeight: 2474 }}>
                     {/* News 1 */}
                     <div className="absolute left-[74px] top-[225px] w-[600px]">
                         <h2 className="font-normal text-[40px] leading-[150%] mb-8">AUSSTELLUNG<br/>»VOM WERDEN UND WACHSEN«</h2>
@@ -113,16 +101,6 @@ export function Updates(): JSX.Element {
 
                     {/* Contact block (global) */}
                     <ContactSection className="absolute left-1/2 top-[2000px] w-full max-w-[560px] h-[311px] -translate-x-1/2 flex flex-col items-center justify-center" />
-
-                    {/* Footer bar */}
-                    <footer className="absolute left-0 bottom-0 w-full flex items-center justify-between px-8 py-2 text-[16px] font-normal">
-                        <div className="flex gap-4">
-                            <span>Sabine Hansen © 2025</span>
-                            <span>Impressum</span>
-                            <span>Datenschutz</span>
-                        </div>
-                        <span>2025</span>
-                    </footer>
                 </div>
             </main>
         );
@@ -187,15 +165,6 @@ export function Updates(): JSX.Element {
                 {/* Contact block (global) */}
                 <ContactSectionMobile className="absolute left-1/2 top-[600px] w-full max-w-[250px] h-[100px] -translate-x-1/2 flex flex-col items-center justify-center" />
 
-                {/* Footer bar */}
-                <footer className="absolute left-0 bottom-0 w-full flex items-center justify-between px-4 py-1 text-[12px] font-normal">
-                    <div className="flex gap-2">
-                        <span>Sabine Hansen © 2025</span>
-                        <span>Impressum</span>
-                        <span>Datenschutz</span>
-                    </div>
-                    <span>2025</span>
-                </footer>
             </div>
         </main>
     );
