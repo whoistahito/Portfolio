@@ -4,9 +4,8 @@ import { ContactSection } from "../components/ContactSection";
 import { useEffect, useState} from "react";
 import ContactSectionMobile from "../components/ContactSectionMobile";
 import News3 from "../assets/optimized/sm/News3.webp";
-import News3Mobile from "../assets/optimized/sm/News3-mobile.webp";
 import Calendar2026 from "../assets/optimized/lg/calendar_big.webp";
-import NachtderKunst from "../assets/optimized/sm/Updates-Nacht-der-Kultur.webp";
+import NachtderKunst from "../assets/optimized/sm/News2-NdKuK.webp";
 
 export function Updates(): JSX.Element {
     const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
@@ -17,6 +16,8 @@ export function Updates(): JSX.Element {
         window.addEventListener("resize", onResize);
         return () => window.removeEventListener("resize", onResize);
     }, []);
+
+
 
     // Desktop layout
     if (!isMobile) {
@@ -51,7 +52,7 @@ export function Updates(): JSX.Element {
                         className="absolute left-[711px] top-[240px] w-[633px] h-[550px] bg-[#7476BC] rounded-[8px] object-cover"
                     />
 
-                    {/* Line 4 */}
+                    {/* Divider Line */}
                     <div className="absolute left-[36px] top-[890px] w-[1367px] border-t border-[#636263]" />
 
                     {/* Image News 2 */}
@@ -107,6 +108,8 @@ export function Updates(): JSX.Element {
         );
     }
 
+
+
     // Mobile layout
     return (
         <main className="w-full min-h-screen bg-[#D3CCC3] font-[Antonio] text-black overflow-x-hidden">
@@ -134,38 +137,61 @@ export function Updates(): JSX.Element {
                 {/* NEWS 1 Image */} 
                     <img 
                         src={News3}
-                        className="translate-y-[15px] w-[180px] h-[160px] rounded-[4px] shrink-0" />
+                        className="translate-y-[15px] w-[180px] h-full rounded-[4px] shrink-0" />
                 </div>
 
-                {/* Line 4 */}
+                {/* Divider Line */}
                 <div className="translate-y-[0px] w-full border-t border-[#636263]" style={{}} />
 
                 {/* NEWS 2 Image */} 
                 <div className="flex gap-4">
-                    <div className="translate-y-[10px] w-[220px] h-[120px] bg-[#C6A4CC] rounded-[4px] flex items-center justify-center">
-                        {/* Placeholder for image or content */}
-                    </div>
+                        <img src={NachtderKunst} className="translate-y-[10px] w-[220px] h-full rounded-[4px] flex items-center justify-center" />
 
                 {/* NEWS 3 Image */} 
-                    <div className="translate-y-[10px] w-[140px] h-[130px] bg-[#E99348] rounded-[4px] flex items-center justify-center">
-                    </div>
+                        <img src={Calendar2026} className="translate-y-[10px] w-[140px] h-full bg-[#E99348] rounded-[4px] flex items-center justify-center" />
                 </div>
 
-                {/* NEWS 3 */}
+                {/* NEWS 3 Text */}
                 <div>
-                    <h3 className="translate-y-[0px] translate-x-[240px] font-normal text-[18px] leading-[150%] mb-1">KUNSTKALENDER VERFÜGBAR</h3>
-                    <p className="translate-y-[40px] translate-x-[240px] font-thin text-[12px] leading-[150%] text-justify mb-2">lalal</p>
-                    <span className="translate-y-[40px] translate-x-[240px] text-[#854686] underline cursor-pointer text-xs">Mehr Infos</span>
+                    <h3 className="translate-y-[0px] translate-x-[200px] font-normal text-[18px] leading-[150%] mb-1">KUNSTKALENDER 2026 ERHÄLTLICH</h3>
+                    <p className="translate-y-[40px] translate-x-[200px] font-thin text-[14px] leading-[150%] text-justify mb-2">Mein Kunstkalender 2026 ist ab sofort an verschiedenen Verkaufsstellen in Schleswig-Holstein sowie online erhältlich.</p>
+                    <span className="translate-y-[40px] translate-x-[200px] text-[#854686] underline cursor-pointer text-xs">Mehr Infos</span>
                 </div>
 
-                {/* News 2 */}
+                {/* NEWS 2 Text */}
                 <div>
-                    <h2 className="translate-y-[-120px] font-normal text-[18px] leading-[150%] mb-1">AUSSTELLUNG XX</h2>
-                    <p className="font-thin text-[12px] leading-[150%] text-justify mb-2">lalal</p>
-                    <div className="w-[90px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px] mt-2">
-                        <span className="font-semibold text-[16px] tracking-[0.1em]">04.03.2026</span>
+                    <h2 className="translate-y-[-120px] font-normal text-[18px] leading-[150%] mb-1">NACHT DER KUNST- UND KULTURORTE</h2>
+                    <p className="font-thin text-[14px] leading-[150%] text-justify mb-2">lalal</p>
+                    <div className="translate-x-[140px] w-[110px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px] mt-2">
+                        <span className="font-semibold text-[16px] tracking-[0.1em]">28.02.2026</span>
                     </div>
                 </div>
+                
+
+            
+                {/* NEWS 2 Image */} 
+                {/* <div className="flex gap-4"> */}
+                        {/* <img src={NachtderKunst} className="translate-y-[10px] w-[220px] h-full rounded-[4px] flex items-center justify-center" /> */}
+                {/* NEWS 2 Text */}
+                    {/* <h2 className="translate-y-[-120px] font-normal text-[18px] leading-[150%] mb-1">NACHT DER KUNST- UND KULTURORTE</h2>
+                    <p className="font-thin text-[14px] leading-[150%] text-justify mb-2">lalal</p>
+                    <div className="translate-x-[140px] w-[110px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px] mt-2">
+                        <span className="font-semibold text-[16px] tracking-[0.1em]">28.02.2026</span>
+                    </div>
+                </div> */}
+
+                {/* NEWS 3 Image */} 
+                {/* <div className="flex gap-4">        
+                    <img src={Calendar2026} className="translate-y-[10px] w-[140px] h-full bg-[#E99348] rounded-[4px] flex items-center justify-center" /> */}
+                {/* NEWS 3 Text */}
+                    {/* <h3 className="translate-y-[0px] translate-x-[200px] font-normal text-[18px] leading-[150%] mb-1">KUNSTKALENDER 2026 ERHÄLTLICH</h3>
+                    <p className="translate-y-[40px] translate-x-[200px] font-thin text-[14px] leading-[150%] text-justify mb-2">Mein Kunstkalender 2026 ist ab sofort an verschiedenen Verkaufsstellen in Schleswig-Holstein sowie online erhältlich.</p>
+                    <span className="translate-y-[40px] translate-x-[200px] text-[#854686] underline cursor-pointer text-xs">Mehr Infos</span>
+                </div>
+             */}
+
+
+
 
                 {/* Contact block (global) */}
                 <div className="flex justify-center mt-4">
