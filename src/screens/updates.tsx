@@ -112,7 +112,7 @@ export function Updates(): JSX.Element {
 
     // Mobile layout
     return (
-        <main className="w-full min-h-screen bg-[#D3CCC3] font-[Antonio] text-black overflow-x-hidden">
+			<div className="bg-[#d4cdc4] grid justify-items-center [align-items:start] w-screen min-h-screen pt-5">
             {/* Language bar */}
             <div className="fixed top-2 right-4 flex gap-2 text-[12px] font-light tracking-tight z-10 bg-[#D3CCC3] px-2 py-1 rounded">
                 <span className="cursor-pointer">de</span>
@@ -145,24 +145,24 @@ export function Updates(): JSX.Element {
 
                 {/* NEWS 2 Image */} 
                 <div className="flex gap-4">
-                        <img src={NachtderKunst} className="translate-y-[10px] w-[220px] h-full rounded-[4px] flex items-center justify-center" />
+                        <img src={NachtderKunst} className="translate-y-[10px] w-[190px] h-full rounded-[4px] flex items-center justify-center" />
 
                 {/* NEWS 3 Image */} 
-                        <img src={Calendar2026} className="translate-y-[10px] w-[140px] h-full bg-[#E99348] rounded-[4px] flex items-center justify-center" />
+                        <img src={Calendar2026} className="translate-y-[10px] w-[190px] h-full bg-[#E99348] rounded-[4px] flex items-center justify-center" />
                 </div>
 
                 {/* NEWS 3 Text */}
-                <div>
-                    <h3 className="translate-y-[0px] translate-x-[200px] font-normal text-[18px] leading-[150%] mb-1">KUNSTKALENDER 2026 ERHÄLTLICH</h3>
-                    <p className="translate-y-[40px] translate-x-[200px] font-thin text-[14px] leading-[150%] text-justify mb-2">Mein Kunstkalender 2026 ist ab sofort an verschiedenen Verkaufsstellen in Schleswig-Holstein sowie online erhältlich.</p>
-                    <span className="translate-y-[40px] translate-x-[200px] text-[#854686] underline cursor-pointer text-xs">Mehr Infos</span>
+                <div className="max-w-[190px]">
+                    <h3 className="translate-y-[-5px] translate-x-[205px] font-normal text-[18px] leading-[150%] mb-1">KUNSTKALENDER 2026 ERHÄLTLICH</h3>
+                    <p className="translate-y-[0px] translate-x-[205px] font-thin text-[14px] leading-[150%] text-justify mb-2">Mein Kunstkalender 2026 ist ab sofort an verschiedenen Verkaufsstellen in Schleswig-Holstein sowie online erhältlich.</p>
+                    <span className="relative left-[205px] translate-y-[40px] text-[#854686] underline cursor-pointer text-xs">Mehr Infos</span>
                 </div>
 
                 {/* NEWS 2 Text */}
-                <div>
-                    <h2 className="translate-y-[-120px] font-normal text-[18px] leading-[150%] mb-1">NACHT DER KUNST- UND KULTURORTE</h2>
-                    <p className="font-thin text-[14px] leading-[150%] text-justify mb-2">lalal</p>
-                    <div className="translate-x-[140px] w-[110px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px] mt-2">
+                <div className="max-w-[190px]">
+                    <h2 className="translate-y-[-280px] font-normal text-[18px] leading-[150%] mb-1">NACHT DER KUNST- UND KULTURORTE</h2>
+                    <p className="translate-y-[-275px] font-thin text-[14px] leading-[150%] text-justify mb-2">lalal</p>
+                    <div className="translate-y-[-110px] translate-x-[80px] w-[110px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-[18px] mt-2">
                         <span className="font-semibold text-[16px] tracking-[0.1em]">28.02.2026</span>
                     </div>
                 </div>
@@ -194,10 +194,10 @@ export function Updates(): JSX.Element {
 
 
                 {/* Contact block (global) */}
-                <div className="flex justify-center mt-4">
-                    <ContactSectionMobile className="w-full max-w-[250px] h-[100px] flex flex-col items-center justify-center" />
-                </div>
+                <div className="w-full flex flex-col items-start">
+                                        <ContactSectionMobile className="mt-6 w-full" />
+                                    </div>
             </div>
-        </main>
+        </div>
     );
 }
