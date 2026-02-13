@@ -63,8 +63,8 @@ export function Exhebitions(): JSX.Element {
 				date: "Februar bis Juni 2026",
 				location: "Rathaus \n Schwentinental",
 				image: Ausstellung5Img,
-				imageClasses: "w-[148px] h-auto top-[78px] left-[240px]",
-				textClasses: "top-[132px] left-[50px] text-right",
+				imageClasses: "w-[110px] h-auto top-[78px] left-[30px]",
+				textClasses: "top-[132px] left-[180px]",
 			},
 			{
 				id: 4,
@@ -72,8 +72,8 @@ export function Exhebitions(): JSX.Element {
 				date: "21. bis 23. November 2025",
 				location: "Freya-Frahm-Haus \n Laboe",
 				image: Ausstellung4Img,
-				imageClasses: "w-[148px] h-auto top-[78px] left-[240px]",
-				textClasses: "top-[132px] left-[50px] text-right",
+				imageClasses: "w-[148px] h-auto top-[340px] left-[240px]",
+				textClasses: "top-[420px] left-[75px] text-right",
 			},
 			{
 				id: 3,
@@ -81,8 +81,8 @@ export function Exhebitions(): JSX.Element {
 				date: "6. und 7. Dezember 2024",
 				location: "Giesecke Licht + Design \n Schwentinental",
 				image: Ausstellung3Img,
-				imageClasses: "w-[218px] h-[145px] top-[255px] left-1",
-				textClasses: "top-[330px] left-[249px]",
+				imageClasses: "w-[218px] h-[145px] top-[500px] left-1",
+				textClasses: "top-[580px] left-[249px]",
 			},
 			{
 				id: 2,
@@ -90,8 +90,8 @@ export function Exhebitions(): JSX.Element {
 				date: "seit September 2024",
 				location: "Giesecke Licht + Design\nSchwentinental",
 				image: Ausstellung2Img,
-				imageClasses: "w-[203px] h-[135px] top-[434px] left-[187px]",
-				textClasses: "top-[461px] left-[5px] text-right",
+				imageClasses: "w-[203px] h-[135px] top-[680px] left-[187px]",
+				textClasses: "top-[710px] left-[5px] text-right",
 			},
 			{
 				id: 1,
@@ -99,8 +99,8 @@ export function Exhebitions(): JSX.Element {
 				date: "August 2024 bis Februar 2026",
 				location: "Aumann Authentics \n Kiel",
 				image: Ausstellung1Img,
-				imageClasses: "w-[238px] h-[168px] top-[604px] left-[11px]",
-				textClasses: "top-[600px] left-[260px]",
+				imageClasses: "w-[238px] h-[168px] top-[850px] left-[11px]",
+				textClasses: "top-[860px] left-[260px]",
 			},
 		];
 
