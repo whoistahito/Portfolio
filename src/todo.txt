@@ -3,7 +3,9 @@ npm run dev
 
 
 go live:
-git push heroku main
+1. github - pull requests - open - commit
+2. pull
+3. terminal: git push heroku main
 
 
 Bilder nicht größer als 1 MB

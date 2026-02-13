@@ -4,6 +4,8 @@ const Ausstellung1Img = new URL("../assets/optimized/sm/Ausstellung-Aumann.webp"
 const Ausstellung2Img = new URL("../assets/optimized/sm/Ausstellung-Giesecke.webp", import.meta.url).href;
 const Ausstellung3Img = new URL("../assets/optimized/sm/Ausstellung-Offenes Atelier.webp", import.meta.url).href;
 const Ausstellung4Img = new URL("../assets/optimized/lg/Ausstellung-FFH.webp", import.meta.url).href;
+const Ausstellung5Img = new URL("../assets/optimized/sm/Ausstellung-Rathaus-Schwentinental.webp", import.meta.url).href;
+
 // Navigation provided by SiteHeader
 // header is provided globally
 import { useEffect, useState, useRef } from "react";
@@ -56,6 +58,15 @@ export function Exhebitions(): JSX.Element {
 
 		const exhibitions = [
 			{
+				id: 5,
+				title: "Gemeinschaftsausstellung",
+				date: "Februar bis Juni 2026",
+				location: "Rathaus \n Schwentinental",
+				image: Ausstellung5Img,
+				imageClasses: "w-[148px] h-auto top-[78px] left-[240px]",
+				textClasses: "top-[132px] left-[50px] text-right",
+			},
+			{
 				id: 4,
 				title: "Ausstellung Kunstmarkt Laboe",
 				date: "21. bis 23. November 2025",
@@ -85,7 +96,7 @@ export function Exhebitions(): JSX.Element {
 			{
 				id: 1,
 				title: "Ausstellung",
-				date: "seit August 2024",
+				date: "August 2024 bis Februar 2026",
 				location: "Aumann Authentics \n Kiel",
 				image: Ausstellung1Img,
 				imageClasses: "w-[238px] h-[168px] top-[604px] left-[11px]",
@@ -141,30 +152,38 @@ export function Exhebitions(): JSX.Element {
 			{/* Main content */}
 			<main className="flex-1 w-full">
 				{/* IMPORTANT: Give the relative container a fixed height on desktop so absolute children are visible */}
-				<div className="w-full max-w-[1440px] lg:h-[2318px] relative bg-background overflow-hidden mx-auto" style={{ marginTop: 0, paddingTop: 0 }}>
-					<div className="w-full lg:w-80 h-24 lg:left-[968px] lg:top-[1717px] lg:absolute justify-start mx-auto lg:mx-0">
+				<div className="w-full max-w-[1440px] lg:h-[3000px] relative bg-background overflow-hidden mx-auto" style={{ marginTop: 0, paddingTop: 0 }}>
+					<div className="w-full lg:w-80 h-24 lg:left-[968px] lg:top-[2210px] lg:absolute justify-start mx-auto lg:mx-0">
 						<span className="text-black text-base font-normal font-['Antonio'] leading-tight">Ausstellung<br /></span>
-						<span className="text-black text-base font-thin font-['Antonio'] leading-tight">seit August 2024<br />Aumann Authentics, Kiel<br /></span>
+						<span className="text-black text-base font-thin font-['Antonio'] leading-tight">August 2024 bis Februar 2026<br />Aumann Authentics, Kiel<br /></span>
 					</div>
-					<div className="w-full lg:w-80 h-24 lg:left-[368px] lg:top-[1217px] lg:absolute text-right justify-start mx-auto lg:mx-0">
+					<div className="w-full lg:w-80 h-24 lg:left-[368px] lg:top-[1717px] lg:absolute text-right justify-start mx-auto lg:mx-0">
 						<span className="text-black text-base font-normal font-['Antonio'] leading-tight">Ausstellung “Licht und Kunst -<br />Kunst und Licht”<br /></span>
 						<span className="text-black text-base font-thin font-['Antonio'] leading-tight">seit September 2024<br />Giesecke Licht + Design<br />Schwentinental<br /></span>
 					</div>
-					<div className="w-full lg:w-80 h-24 lg:left-[651px] lg:top-[809px] lg:absolute justify-start mx-auto lg:mx-0">
+					<div className="w-full lg:w-80 h-24 lg:left-[651px] lg:top-[1320px] lg:absolute justify-start mx-auto lg:mx-0">
 						<span className="text-black text-base font-normal font-['Antonio'] leading-tight">Offenes Atelier<br /></span>
 						<span className="text-black text-base font-thin font-['Antonio'] leading-tight">6. und 7. Dezember 2024<br />Giesecke Licht + Design, Schwentinental<br /></span>
 					</div>
-					<div className="w-full lg:w-80 h-24 lg:left-[568px] lg:top-[338px] lg:absolute text-right justify-start mx-auto lg:mx-0">
+					<div className="w-full lg:w-80 h-24 lg:left-[568px] lg:top-[809px] lg:absolute text-right justify-start mx-auto lg:mx-0">
 						<span className="text-black text-base font-normal font-['Antonio'] leading-tight">Ausstellung Kunstmarkt Laboe<br /></span>
 						<span className="text-black text-base font-thin font-['Antonio'] leading-tight">21. bis 23. November 2025<br />Freya-Frahm-Haus, Laboe<br /></span>
 					</div>
+					<div className="w-full lg:w-80 h-24 lg:left-[480px] lg:top-[338px] lg:absolute justify-start mx-auto lg:mx-0">
+						<span className="text-black text-base font-normal font-['Antonio'] leading-tight">Gemeinschaftsausstellung<br /></span>
+						<span className="text-black text-base font-thin font-['Antonio'] leading-tight">Februar bis Juni 2026<br />Rathaus, Schwentinental<br /></span>
+					</div>
+
 					<ContactSection
-						className="lg:absolute relative lg:w-[560px] w-full lg:top-[2000px] lg:left-[440px] mx-auto lg:mx-0"
+						className="lg:absolute relative lg:w-[560px] w-full lg:top-[2600px] lg:left-[440px] mx-auto lg:mx-0"
 					/>
-					<img className="w-full lg:w-[745px] h-auto lg:h-[527px] lg:left-[123px] lg:top-[1400px] lg:absolute object-cover mx-auto lg:mx-0" src={Ausstellung1Img} loading="lazy" />
-					<img className="w-full lg:w-[650px] h-auto lg:h-96 lg:left-[736px] lg:top-[953px] lg:absolute object-cover mx-auto lg:mx-0" src={Ausstellung2Img} loading="lazy" />
-					<img className="w-full lg:w-[579px] h-auto lg:h-96 lg:left-[18px] lg:top-[592px] lg:absolute object-cover mx-auto lg:mx-0" src={Ausstellung3Img} loading="lazy" />
-					<img className="w-full lg:w-[900px] h-auto lg:h-[570px] lg:left-[736px] lg:top-[203px] lg:absolute object-contain mx-auto lg:mx-0" src={Ausstellung4Img} loading="lazy" />
+					<img className="w-full lg:w-[745px] h-auto lg:h-[527px] lg:left-[123px] lg:top-[1950px] lg:absolute object-cover mx-auto lg:mx-0" src={Ausstellung1Img} loading="lazy" />
+					<img className="w-full lg:w-[650px] h-auto lg:h-96 lg:left-[736px] lg:top-[1500px] lg:absolute object-cover mx-auto lg:mx-0" src={Ausstellung2Img} loading="lazy" />
+					<img className="w-full lg:w-[579px] h-auto lg:h-96 lg:left-[18px] lg:top-[1150px] lg:absolute object-cover mx-auto lg:mx-0" src={Ausstellung3Img} loading="lazy" />
+					<img className="w-full lg:w-[900px] h-auto lg:h-[570px] lg:left-[736px] lg:top-[690px] lg:absolute object-contain mx-auto lg:mx-0" src={Ausstellung4Img} loading="lazy" />
+					<img className="w-full lg:w-[579px] h-auto lg:h-[770px] lg:left-[18px] lg:top-[200px] lg:absolute object-contain mx-auto lg:mx-0" src={Ausstellung5Img} loading="lazy" />
+
+
 					{/* Footer is now global */}
 				</div>
 			</main>
