@@ -1,5 +1,5 @@
 import { ContactSection } from "../components/ContactSection";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import ContactSectionMobile from "../components/ContactSectionMobile";
 import News3 from "../assets/optimized/sm/News3.webp";
 import Calendar2026 from "../assets/optimized/lg/calendar_big.webp";
@@ -15,9 +15,7 @@ const dlp = (px: number) => `${(px / DW) * 100}%`;
 const dtp = (px: number) => `${(px / DH) * 100}%`;
 
 export function Updates(): JSX.Element {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth <= 768 : false,
-  );
+    const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
 
   useEffect(() => {
     if (typeof window === "undefined") return;
