@@ -57,6 +57,21 @@ type Artwork = {
 
 // ─── Artwork data ─────────────────────────────────────────────────────────────
 const artworks: Artwork[] = [
+  // Restore the vertical position of the first artwork so it sits closer to the header like before
+  { id: 1, smallSrc: smAufbruchI, largeSrc: lgAufbruchI, alt: "Ausbruch", title: "Ausbruch", year: "2022", dimensions: "70 x 60 cm", img: { w: 706, h: 600, top: 232, left: 31 }, caption: { w: 196, top: 316, left: 812 } },
+  { id: 2, smallSrc: smFruehling, largeSrc: lgFruehling, alt: "Frühling", title: "Frühling", year: "2020", dimensions: "70 x 70 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 3, smallSrc: smEismeer, largeSrc: lgEismeer, alt: "Eismeer", title: "Eismeer", year: "2020", dimensions: "80 x 40 cm", img: { w: 1202, h: 600, top: 1166, left: 68 }, caption: { w: 196, top: 1409, left: 1291 } },
+  { id: 4, smallSrc: smZaghaft, largeSrc: lgZaghaft, alt: "Zaghaft beginnt etwas Neues", title: "Zaghaft beginnt etwas Neues", year: "2021", dimensions: "70 x 70 cm", img: { w: 511, h: 499, top: 1839, left: 13 }, caption: { w: 196, top: 1918, left: 566 } },
+  { id: 5, smallSrc: smPower, largeSrc: lgPower, alt: "power", title: "power", year: "2021", dimensions: "70 x 70 cm", img: { w: 566, h: 600, top: 2010, left: 843 }, caption: { w: 196, top: 2435, left: 639, align: "right" } },
+  { id: 6, smallSrc: smTanzendeA, largeSrc: lgTanzendeA, alt: "Tanzende", title: "Tanzende", year: "2024", dimensions: "je 80 x 40 cm", groupId: "tanzende", img: { w: 297, h: 600, top: 2610, left: 120 }, caption: { w: 196, top: 2840, left: 861 } },
+  { id: 7, smallSrc: smTanzendeB, largeSrc: lgTanzendeB, alt: "Tanzende b", title: "", year: "", dimensions: "", groupId: "tanzende", img: { w: 297, h: 600, top: 2610, left: 417 } },
+  { id: 8, smallSrc: smSonnenblumen, largeSrc: lgSonnenblumen, alt: "Sonnenblumen", title: "Sonnenblumen", year: "2021", dimensions: "100 x 80 cm", img: { w: 797, h: 524, top: 3283, left: 608 }, caption: { w: 196, top: 3420, left: 350, align: "right" } },
+  { id: 9, smallSrc: smKuechenphilosophie, largeSrc: lgKuechenphilosophie, alt: "Küchenphilosophie", title: "Küchenphilosophie", year: "2022", dimensions: "100 x 100 cm", img: { w: 497, h: 494, top: 3646, left: 68 }, caption: { w: 196, top: 3942, left: 575 } },
+  { id: 10, smallSrc: smOhneTitelA, largeSrc: lgOhneTitelA, alt: "Resonanz", title: "Resonanz", year: "2024", dimensions: "je 80 x 40 cm", groupId: "ohne-titel-diptych", img: { w: 301, h: 600, top: 4170, left: 1089 }, caption: { w: 196, top: 4299, left: 467, align: "right" } },
+  { id: 11, smallSrc: smOhneTitelB, largeSrc: lgOhneTitelB, alt: "Resonanz", title: "", year: "", dimensions: "", groupId: "ohne-titel-diptych", img: { w: 299, h: 600, top: 4170, left: 790 } },
+  { id: 12, smallSrc: smAufbruchII, largeSrc: lgAufbruchII, alt: "Aufbruch", title: "Aufbruch", year: "2024", dimensions: "100 x 100 cm", img: { w: 781, h: 782, top: 4800, left: 26 }, caption: { w: 196, top: 5275, left: 965 } },
+  { id: 13, smallSrc: smOhneTitel1, largeSrc: lgOhneTitel1, alt: "Sandmeer", title: "Sandmeer", year: "2025", dimensions: "120 x 100 cm", img: { w: 904, h: 600, top: 5612, left: 524 }, caption: { w: 196, top: 6016, left: 302, align: "right" } },
+  { id: 14, smallSrc: smSpuren, largeSrc: lgSpuren, alt: "Spuren", title: "Spuren", year: "2022", dimensions: "100 x 100 cm", img: { w: 776, h: 781, top: 6300, left: 333 }, caption: { w: 196, top: 6415, left: 1173 } }
   {
     id: 1,
     smallSrc: smAufbruchI,
