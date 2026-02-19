@@ -8,7 +8,7 @@ type ContactSectionMobileProps = HTMLAttributes<HTMLElement> & {
 
 /**
  * Mobile-sized contact block used across mobile pages.
- * Now uses flex layout for robust stacking; Instagram icon won't overlap text.
+ * Fully fluid — width is inherited from the parent container.
  */
 export function ContactSectionMobile({
   className = "",
@@ -20,7 +20,7 @@ export function ContactSectionMobile({
   return (
     <section
       className={[
-        "flex flex-col items-center justify-start w-[390px] min-h-[313px] py-6 gap-2.5 relative",
+        "flex flex-col items-center justify-start w-full py-6 gap-2.5",
         className,
       ]
         .filter(Boolean)
@@ -28,41 +28,33 @@ export function ContactSectionMobile({
       style={style}
       {...rest}
     >
-      <div className="flex flex-col items-center gap-2 w-[245px]">
+      <div className="flex flex-col items-center gap-2 w-full max-w-[280px]">
         {showName && (
-          <div className="w-full [font-family:'Antonio',Helvetica] font-normal text-black text-3xl text-center tracking-[-0.48px] leading-[34px]">
-            <span className="tracking-[-0.26px]">
-              Sabine Hansen
-              <br />
-            </span>
+          <div className="w-full [font-family:'Antonio',Helvetica] font-normal text-black text-3xl text-center tracking-[-0.48px] leading-[1.2]">
+            Sabine Hansen
           </div>
         )}
 
         {showLocation && (
-          <div className="w-full [font-family:'Antonio',Helvetica] font-normal text-black text-xl text-center tracking-[-0.12px] leading-[24px]">
-            <span>
-              Schwentinental, Deutschland
-              <br />
-            </span>
+          <div className="w-full [font-family:'Antonio',Helvetica] font-normal text-black text-xl text-center tracking-[-0.12px] leading-[1.3]">
+            Schwentinental, Deutschland
           </div>
         )}
 
-        <div className="w-full [font-family:'Antonio',Helvetica] font-normal text-black text-lg text-center tracking-[-0.08px] leading-[22px]">
+        <div className="w-full [font-family:'Antonio',Helvetica] font-normal text-black text-lg text-center tracking-[-0.08px] leading-[1.3]">
           <a
             href="mailto:kontakt@sabinehansen.art"
             rel="noopener noreferrer"
             target="_blank"
-            className="no-underline text-black hover:text-[#854686] transition-colors"
+            className="underline text-black hover:text-[#854686] transition-colors"
           >
-            <span className="underline">
-              kontakt@sabinehansen.art
-            </span>
+            kontakt@sabinehansen.art
           </a>
         </div>
       </div>
 
-      {/* Instagram icon below the text, not on top */}
-  <div className="flex justify-center mt-6">
+      {/* Instagram icon */}
+      <div className="flex justify-center mt-4">
         <a
           href="https://www.instagram.com/sabinehansen.art/"
           target="_blank"
@@ -73,8 +65,8 @@ export function ContactSectionMobile({
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-    width="36"
-    height="36"
+            width="36"
+            height="36"
             viewBox="0 0 24 24"
             role="img"
           >
