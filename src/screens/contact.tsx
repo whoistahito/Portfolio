@@ -1,112 +1,165 @@
 import { ContactSection } from "../components/ContactSection";
 import kontaktImgSm from "../assets/optimized/sm/Kontakt.webp";
 import kontaktImgLg from "../assets/optimized/lg/Kontakt.webp";
-import { useEffect, useState, useRef } from "react";
 import ContactSectionMobile from "../components/ContactSectionMobile";
 
+/*
+  Responsive strategy
+  ───────────────────
+  Desktop (≥ 768 px)
+    The original design used a fixed 1440 × 1458 px canvas with
+    absolutely-positioned children.  We keep the exact same composition
+    but express every coordinate as a percentage of that reference canvas
+    so the layout scales proportionally to any viewport width.
+
+      horizontal % = original_px / 1440 × 100
+      vertical   % = original_px / 1458 × 100
+
+    The container maintains the 1440 ∶ 1458 aspect ratio through the
+    padding-top trick  (padding-top is always relative to the element's
+    OWN WIDTH, so `padding-top: 101.25%` makes height = 101.25 % of width).
+
+  Mobile (< 768 px)
+    The original mobile design used a fixed 390 px wide container.
+    We replace it with a fully fluid flex-row layout where widths are
+    expressed as percentages of the available space so the same visual
+    composition (text left, image right) works on any phone width.
+    The image keeps the original 186 ∶ 353 aspect ratio via Tailwind's
+    `aspect-[186/353]` utility so height scales automatically.
+
+  No JavaScript is needed to switch between the two layouts — `md:hidden`
+  and `hidden md:block` do the job in CSS.  This also eliminates the
+  Rules-of-Hooks violation that existed when hooks were called inside
+  the `if (isMobile)` branch.
+*/
+
+// ─── Design-reference constants ──────────────────────────────────────────────
+const W = 1440; // canvas width  (px)
+const H = 1458; // canvas height (px)
+
+// Shorthand helpers that turn original pixel coords into % strings
+const lp = (px: number) => `${(px / W) * 100}%`; // left / width  → % of canvas W
+const tp = (px: number) => `${(px / H) * 100}%`; // top  / height → % of canvas H
+
 export function Contact(): JSX.Element {
-	const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
+  return (
+    <>
+      {/* ════════════════════════════════════════════════════════════════════
+          MOBILE LAYOUT  —  shown below 768 px, hidden above
+          ════════════════════════════════════════════════════════════════════ */}
+      <div className="md:hidden bg-[#d4cdc4] min-h-screen flex flex-col items-center pt-5">
+        {/* Push content below the fixed mobile header (~64 px tall) */}
+        <div className="h-16 w-full flex-shrink-0" />
 
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-		const onResize = () => setIsMobile(window.innerWidth <= 768);
-		window.addEventListener("resize", onResize);
-		return () => window.removeEventListener("resize", onResize);
-	}, []);
+        {/* ── Main content row ─────────────────────────────────────────── */}
+        <div className="w-full px-3">
+          <div className="flex flex-row gap-[2%] items-start">
+            {/*
+              Text column
+              Original width: 167 px inside ~366 px content area (390 - 24 px padding)
+              167 / 366 ≈ 45.6 % → use 45 % to leave breathing room
+            */}
+            <div className="w-[45%] flex-shrink-0 [font-family:'Antonio',Helvetica] font-normal text-black text-base text-center tracking-[-0.05px] leading-6">
+              Bei Interesse an meinen Bildern freue ich mich über eine E-Mail:
+              <a
+                href="mailto:kontakt@sabinehansen.art"
+                rel="noopener noreferrer"
+                target="_blank"
+                className="block mt-3 underline text-black hover:text-[#854686] transition-colors"
+              >
+                kontakt@sabinehansen.art
+              </a>
+            </div>
 
-	if (isMobile) {
-		const stackingRef = useRef<HTMLDivElement | null>(null);
-		const [stackHeight, setStackHeight] = useState<number>(546);
+            {/*
+              Image column
+              Original size: 186 × 353 px → aspect ratio 186 ∶ 353
+              flex-1 lets it fill whatever space the text column leaves.
+            */}
+            <div className="flex-1 flex justify-end">
+              <img
+                className="w-full aspect-[186/353] object-cover"
+                alt="Kontakt"
+                src={kontaktImgSm}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
 
-		useEffect(() => {
-			const el = stackingRef.current;
-			if (!el) return;
-			const update = () => {
-				const parentRect = el.getBoundingClientRect();
-				const descendants = Array.from(el.querySelectorAll('*')) as HTMLElement[];
-				let max = 0;
-				descendants.forEach((ch) => {
-					const rect = ch.getBoundingClientRect();
-					const bottom = rect.bottom - parentRect.top;
-					if (bottom > max) max = bottom;
-				});
-				const value = Math.max(300, Math.ceil(max + 24));
-				setStackHeight(value);
-			};
-			const ro = new (window as any).ResizeObserver(update);
-			ro.observe(el);
-			const imgs = el.querySelectorAll('img');
-			imgs.forEach((i) => i.addEventListener('load', update));
-			window.addEventListener('resize', update);
-			setTimeout(update, 50);
-			return () => {
-				ro.disconnect();
-				imgs.forEach((i) => i.removeEventListener('load', update));
-				window.removeEventListener('resize', update);
-			};
-		}, []);
+        {/* ── Footer contact block ─────────────────────────────────────── */}
+        <ContactSectionMobile className="mt-6 w-full" />
+      </div>
 
-		return (
-			<div className="bg-[#d4cdc4] grid justify-items-center [align-items:start] w-screen min-h-screen pt-5">
-				{/* header is rendered globally */}
-				<div className="bg-[#d4cdc4] w-[390px] relative flex flex-col">
-					{/* Top spacer to push content down from header */}
-					<div className="h-16"></div>
+      {/* ════════════════════════════════════════════════════════════════════
+          DESKTOP LAYOUT  —  hidden below 768 px, shown above
+          ════════════════════════════════════════════════════════════════════ */}
+      <div className="hidden md:block w-full bg-background">
+        {/*
+          Outer shell: sets the height via padding-top so it always equals
+          (1458 / 1440) × 100 % = 101.25 % of the viewport width.
+          All children live inside the `absolute inset-0` inner div.
+        */}
+        <div
+          className="relative w-full overflow-hidden"
+          style={{ paddingTop: `${(H / W) * 100}%` }}
+        >
+          <div className="absolute inset-0">
+            {/*
+              ── Text block ───────────────────────────────────────────────
+              Original: left 149 px, top 269 px, width 508 px
+              font-size scales with viewport width via clamp():
+                at 768 px  →  clamp floor ≈  1 rem  (16 px)
+                at 1440 px →  2.5 vw        = 36 px
+                hard cap   →  2.25 rem      (36 px)
+            */}
+            <div
+              className="absolute [font-family:'Antonio',Helvetica] font-normal text-black text-center"
+              style={{
+                left: lp(149),
+                top: tp(269),
+                width: lp(508),
+                fontSize: "clamp(1rem, 2.5vw, 2.25rem)",
+                lineHeight: 1.67,
+              }}
+            >
+              Bei Interesse an meinen Bildern freue ich mich über eine E-Mail:
+            </div>
 
-					{/* Main content area using flex layout */}
-					<div ref={stackingRef} className="flex flex-col flex-1" style={{ minHeight: stackHeight }}>
-						{/* Horizontal layout for text and image */}
-						<div className="flex flex-row px-3 gap-2">
-							{/* Left side - Text content */}
-							<div className="w-[167px] flex-shrink-0">
-								<div className="[font-family:'Antonio',Helvetica] font-normal text-black text-base text-center tracking-[-0.32px] leading-6">
-									<span className="tracking-[-0.05px]">Bei Interesse an meinen Bildern freue ich mich über eine E-Mail:</span>
-									<a href="mailto:kontakt@sabinehansen.art" rel="noopener noreferrer" target="_blank" className="block mt-3">
-										<span className="tracking-[-0.05px] underline">kontakt@sabinehansen.art</span>
-									</a>
-								</div>
-							</div>
+            {/*
+              ── Contact / email + Instagram section ──────────────────────
+              Original: top 550 px, left 149 px, width 508 px
+            */}
+            <ContactSection
+              className="absolute"
+              style={{
+                top: tp(550),
+                left: lp(149),
+                width: lp(508),
+              }}
+              showName={false}
+              showLocation={false}
+            />
 
-							{/* Right side - Image */}
-							<div className="flex-1 flex justify-end">
-								<img className="w-[186px] h-[353px] object-cover" alt="Element" src={kontaktImgSm} />
-							</div>
-						</div>
-					</div>
-
-					<div className="w-full flex flex-col items-start">
-						<ContactSectionMobile className="mt-6 w-full" />
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	return (
-		<div className="min-h-screen bg-background text-foreground flex flex-col">
-			{/* header is rendered globally */}
-			{/* Main content */}
-			<main className="flex-1 w-full">
-				<div className="w-full max-w-[1440px] relative bg-background overflow-hidden mx-auto lg:h-[1458px]" style={{ marginTop: 0, paddingTop: 0 }}>
-					<div className="w-full lg:w-[508px] h-96 lg:left-[149px] lg:top-[269px] lg:absolute text-center justify-start mx-auto lg:mx-0">
-						<span className="text-black text-4xl font-normal font-['Antonio'] leading-[60px]">
-							Bei Interesse an meinen Bildern freue ich mich über eine E-Mail:
-						</span>
-					</div>
-					{/* Use shared ContactSection for email + icon centered under the text */}
-					<ContactSection
-						className="lg:absolute relative lg:w-[508px] w-full lg:top-[550px] lg:left-[149px] mx-auto lg:mx-0"
-						showName={false}
-						showLocation={false}
-					/>
-					<img
-						className="w-full lg:w-[549px] h-auto lg:h-[1044px] lg:left-[855px] lg:top-[184px] lg:absolute object-cover mx-auto lg:mx-0"
-						src={kontaktImgLg}
-						alt="Kontakt Vorschau"
-						loading="lazy"
-					/>
-				</div>
-			</main>
-		</div>
-	);
+            {/*
+              ── Right-hand image ─────────────────────────────────────────
+              Original: left 855 px, top 184 px, width 549 px, height 1044 px
+            */}
+            <img
+              className="absolute object-cover"
+              style={{
+                left: lp(855),
+                top: tp(184),
+                width: lp(549),
+                height: tp(1044),
+              }}
+              src={kontaktImgLg}
+              alt="Kontakt Vorschau"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
