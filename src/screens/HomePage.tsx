@@ -71,7 +71,7 @@ const artworks: Artwork[] = [
   { id: 11, smallSrc: smOhneTitelB, largeSrc: lgOhneTitelB, alt: "Resonanz", title: "", year: "", dimensions: "", groupId: "ohne-titel-diptych", img: { w: 299, h: 600, top: 4170, left: 790 } },
   { id: 12, smallSrc: smAufbruchII, largeSrc: lgAufbruchII, alt: "Aufbruch", title: "Aufbruch", year: "2024", dimensions: "100 x 100 cm", img: { w: 781, h: 782, top: 4800, left: 26 }, caption: { w: 196, top: 5275, left: 965 } },
   { id: 13, smallSrc: smOhneTitel1, largeSrc: lgOhneTitel1, alt: "Sandmeer", title: "Sandmeer", year: "2025", dimensions: "120 x 100 cm", img: { w: 904, h: 600, top: 5612, left: 524 }, caption: { w: 196, top: 6016, left: 302, align: "right" } },
-  { id: 14, smallSrc: smSpuren, largeSrc: lgSpuren, alt: "Spuren", title: "Spuren", year: "2022", dimensions: "100 x 100 cm", img: { w: 776, h: 781, top: 6300, left: 333 }, caption: { w: 196, top: 6415, left: 1173 } }
+  { id: 14, smallSrc: smSpuren, largeSrc: lgSpuren, alt: "Spuren", title: "Spuren", year: "2022", dimensions: "100 x 100 cm", img: { w: 776, h: 781, top: 6300, left: 333 }, caption: { w: 196, top: 6415, left: 1173 } },
   {
     id: 1,
     smallSrc: smAufbruchI,
@@ -176,8 +176,8 @@ const artworks: Artwork[] = [
     id: 10,
     smallSrc: smOhneTitelA,
     largeSrc: lgOhneTitelA,
-    alt: "Blaugrün",
-    title: "Blaugrün",
+    alt: "Resonanz",
+    title: "Resonanz",
     year: "2024",
     dimensions: "je 80 x 40 cm",
     img: { w: 301, h: 600, top: 4170, left: 1089 },
@@ -188,7 +188,7 @@ const artworks: Artwork[] = [
     id: 11,
     smallSrc: smOhneTitelB,
     largeSrc: lgOhneTitelB,
-    alt: "Blaugrün",
+    alt: "Resonanz",
     title: "",
     year: "",
     dimensions: "",
