@@ -218,12 +218,12 @@ export function Updates(): JSX.Element {
           <img
             src={News3}
             alt="Ausstellung Vom Werden und Wachsen"
-            className="absolute object-cover rounded-lg bg-[#7476BC]"
+            className="absolute object-contain rounded-lg border-4 border-orange-500"
             style={{
-              left: dlp(711),
+              left: dlp(870),
               top: dtp(240),
-              width: dlp(633),
-              height: dtp(550),
+              width: dlp(380),
+              height: "auto",
             }}
           />
 
