@@ -52,7 +52,7 @@ export function Updates(): JSX.Element {
                 <br />
                 24321 Lütjenburg
               </p>
-              <div className="self-end w-[180px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-full">
+              <div className="w-[140px] h-[32px] flex items-center justify-center border-2 border-[#854686] rounded-full">
                 <span className="font-semibold text-[13px] tracking-[0.05em]">
                   04.03. – 14.04.2026
                 </span>
@@ -61,7 +61,7 @@ export function Updates(): JSX.Element {
             <img
               src={News3}
               alt="Ausstellung Vom Werden und Wachsen"
-              className="w-[150px] h-auto rounded object-cover shrink-0"
+              className="w-[180px] h-auto rounded object-cover shrink-0 border-2 border-orange-500"
             />
           </div>
 
@@ -89,7 +89,7 @@ export function Updates(): JSX.Element {
                 Elsa-Brandström-Straße 7<br />
                 24223 Schwentinental
               </p>
-              <div className="w-full h-[28px] flex items-center justify-center border-2 border-[#854686] rounded-full mt-1">
+              <div className="w-[80px] h-[28px] flex items-center justify-center border-2 border-[#854686] rounded-full mt-1">
                 <span className="font-semibold text-[12px] tracking-[0.05em]">
                   28.02.2026
                 </span>
