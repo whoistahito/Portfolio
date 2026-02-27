@@ -7,5 +7,6 @@ go live:
 2. pull
 3. terminal: git push heroku main
 
+- falls abgemeldet: heroku login –
 
 Bilder nicht größer als 1 MB
