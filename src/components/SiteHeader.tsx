@@ -2,7 +2,6 @@ import { useRef, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useLanguage } from "../lib/LanguageContext";
 import SiteHeaderMobile from "./SiteHeaderMobile";
-import { AnnouncementBar } from "./AnnouncementBar";
 
 export const SiteHeader = (): JSX.Element => {
   const { t } = useLanguage();
@@ -67,7 +66,6 @@ export const SiteHeader = (): JSX.Element => {
             ))}
           </nav>
         </div>
-        <AnnouncementBar />
       </header>
     </div>
   );
