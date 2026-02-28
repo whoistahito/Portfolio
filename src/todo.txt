@@ -10,3 +10,13 @@ go live:
 - falls abgemeldet: heroku login –
 
 Bilder nicht größer als 1 MB
+
+
+
+        <Route path="/gallery-2020" element={<Galerie2020 />} />
+        <Route path="/gallery-2021" element={<Galerie2021 />} />
+        <Route path="/gallery-2022" element={<Galerie2022 />} />
+        <Route path="/gallery-2023" element={<Galerie2023 />} />
+        <Route path="/gallery-2024" element={<Galerie2024 />} />
+        <Route path="/gallery-2025" element={<Galerie2025 />} />
+        <Route path="/gallery-2026" element={<Galerie2026 />} />

@@ -1,3 +1,4 @@
+
 import {
   useCallback,
   useEffect,
@@ -9,16 +10,49 @@ import {
 import { ContactSection } from "../components/ContactSection";
 import ContactSectionMobile from "../components/ContactSectionMobile";
 
-// ─── Image imports 1, 2, 4, 7, 10, 13, 14, 16, 19 ────────────────────────────────────────────────────────────
+// ─── Image imports ────────────────────────────────────────────────────────────
 import smSandmeer from "../assets/optimized/sm/1-Sandmeer-sm.webp";
 import smSonnenblumen from "../assets/optimized/sm/2-Sonnenblumen-sm.webp";
+import smKuechenphilosophie from "../assets/optimized/sm/3-Kuechenphilosophie-sm.webp";
 import smPower from "../assets/optimized/sm/4-power-sm.webp";
+import smResonanzA from "../assets/optimized/sm/5-Resonanz-sm.webp";
+import smResonanzB from "../assets/optimized/sm/6-Resonanz-sm.webp";
 import smAusbruch from "../assets/optimized/sm/7-Ausbruch-sm.webp";
+import smTanzendeA from "../assets/optimized/sm/8-Tanzende-sm.webp";
+import smTanzendeB from "../assets/optimized/sm/9-Tanzende-sm.webp";
 import smEismeer from "../assets/optimized/sm/10-Eismeer-sm.webp";
+import smZaghaft from "../assets/optimized/sm/11-Zaghaft-beginnt-etwas-Neues-sm.webp";
+import smFruehling from "../assets/optimized/sm/12-Fruehling-sm.webp";
 import smAufbruch from "../assets/optimized/sm/13-Aufbruch-sm.webp";
 import smSpuren from "../assets/optimized/sm/14-Spuren-sm.webp";
+import smVonderDunkelheit from "../assets/optimized/sm/15-Von-der-Dunkelheit-ins-Licht-sm.webp";
 import smAufloesung from "../assets/optimized/sm/16-Aufloesung-in-blau-sm.webp";
-import smEismeerII from "../assets/optimized/sm/19-Eismeer-II-sm.webp";
+import smKleineAufruhr from "../assets/optimized/sm/17-Kleine-Aufruhr-sm.webp";
+import smRiff from "../assets/optimized/sm/18-Riff-sm.webp";
+import smEismeerII from "../assets/optimized/sm/19-Eismeer-2-sm.webp";
+import smTiefseetraum from "../assets/optimized/sm/20-Tiefseetraum-sm.webp";
+import smUnterwasserwunder from "../assets/optimized/sm/21-Unterwasserwunder-sm.webp";
+import smAufruhr from "../assets/optimized/sm/22-Aufruhr-sm.webp";
+import smFarbedrängt from "../assets/optimized/sm/23-Farbe-draengt-zwischen-Hitze-und-Form-sm.webp";
+import smWennBewegung from "../assets/optimized/sm/24-Wenn-Bewegung-bleibt-sm.webp";
+import smZustandeines from "../assets/optimized/sm/25-Zustand-eines-Himmels-sm.webp";
+import smFokus from "../assets/optimized/sm/26-Fokus-sm.webp";
+
+
+import lgAufbruch from "../assets/optimized/lg/13-Aufbruch-lg.webp";
+import lgAusbruch from "../assets/optimized/lg/7-Ausbruch-lg.webp";
+import lgEismeer from "../assets/optimized/lg/Eismeer-web.webp";
+import lgFruehling from "../assets/optimized/lg/Fruehling-web.webp";
+import lgKuechenphilosophie from "../assets/optimized/lg/Küchenphilosophie-web.webp";
+import lgOhneTitelA from "../assets/optimized/lg/ohneTitel-a-web.webp";
+import lgOhneTitel1 from "../assets/optimized/lg/ohneTitel1-web.webp";
+import lgOhneTitelB from "../assets/optimized/lg/ohneTitelb-web.webp";
+import lgPower from "../assets/optimized/lg/power-web.webp";
+import lgSonnenblumen from "../assets/optimized/lg/Sonnenblumen-web.webp";
+import lgSpuren from "../assets/optimized/lg/Spuren-web.webp";
+import lgTanzendeA from "../assets/optimized/lg/Tanzende-a-web.webp";
+import lgTanzendeB from "../assets/optimized/lg/Tanzende-b-web.webp";
+import lgZaghaft from "../assets/optimized/lg/Zaghaft-beginnt-etwas-Neues-web.webp";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Artwork = {
@@ -31,7 +65,7 @@ type Artwork = {
   dimensions: string;
   groupId?: string;
   /** Desktop absolute coords (px, reference canvas 1440 × 7700) */
-  img: { w: number; top: number; left: number };
+  img: { w: number; h: number; top: number; left: number };
   /** Desktop caption coords (px, same reference canvas) */
   caption?: { w?: number; top: number; left: number; align?: "right" | "left" };
 };
@@ -39,33 +73,188 @@ type Artwork = {
 // ─── Artwork data ─────────────────────────────────────────────────────────────
 const artworks: Artwork[] = [
   // Restore the vertical position of the first artwork so it sits closer to the header like before
-   { id: 4, smallSrc: smPower, largeSrc: smPower, alt: "power", title: "power", year: "2021", dimensions: "70 x 70 cm", 
-    img: { w: 566, top: 232, left: 843 }, caption: { w: 196, top: 316, left: 639, align: "right" } },
-
-  { id: 13, smallSrc: smAufbruch, largeSrc: smAufbruch, alt: "Aufbruch", title: "Aufbruch", year: "2024", dimensions: "100 x 100 cm", 
-    img: { w: 700, top: 600, left: 26 }, caption: { w: 196, top: 1100, left: 800 } },
-
-  { id: 10, smallSrc: smEismeer, largeSrc: smEismeer, alt: "Eismeer", title: "Eismeer", year: "2020", dimensions: "80 x 40 cm", 
-    img: { w: 900, top: 1340, left: 530 }, caption: { w: 196, top: 1600, left: 200, align: "right" } },
-
-  { id: 19, smallSrc: smEismeerII, largeSrc: smEismeerII, alt: "Eismeer II", title: "Eismeer II", year: "2024", dimensions: "100 x 50 cm", 
-    img: { w: 850, top: 1870, left: 33 }, caption: { w: 196, top: 1900, left: 1000 } },
-
-  { id: 16, smallSrc: smAufloesung, largeSrc: smAufloesung, alt: "Auflösung in blau", title: "Auflösung in blau", year: "2022", dimensions: "70 x 70 cm", 
-    img: { w: 670, top: 2300, left: 600 }, caption: { w: 196, top: 2800, left: 350, align: "right" } },
-
-  { id: 2, smallSrc: smSonnenblumen, largeSrc: smSonnenblumen, alt: "Sonnenblumen", title: "Sonnenblumen", year: "2021", dimensions: "100 x 80 cm", 
-    img: { w: 797, top: 3000, left: 10 }, caption: { w: 196, top: 3200, left: 815} },
-
-  { id: 14, smallSrc: smSpuren, largeSrc: smSpuren, alt: "Spuren", title: "Spuren", year: "2022", dimensions: "100 x 100 cm", 
-    img: { w: 650, top: 3600, left: 760 }, caption: { w: 196, top: 3700, left: 300, align: "right" } },
-
-  { id: 1, smallSrc: smSandmeer, largeSrc: smSandmeer, alt: "Sandmeer", title: "Sandmeer", year: "2025", dimensions: "120 x 100 cm", 
-    img: { w: 904, top: 4400, left: 200 }, caption: { w: 196, top: 4800, left: 1150 } },
-
-  { id: 7, smallSrc: smAusbruch, largeSrc: smAusbruch, alt: "Ausbruch", title: "Ausbruch", year: "2022", dimensions: "70 x 60 cm", 
-    img: { w: 706, top: 5050, left: 640 }, caption: { w: 196, top: 5316, left: 239, align: "right" } },
-
+  { id: 1, smallSrc: smSandmeer, largeSrc: lgOhneTitel1, alt: "Sandmeer", title: "Sandmeer", year: "2025", dimensions: "120 x 100 cm", img: { w: 904, h: 600, top: 5612, left: 524 }, caption: { w: 196, top: 6016, left: 302, align: "right" } },
+  { id: 2, smallSrc: smSonnenblumen, largeSrc: lgSonnenblumen, alt: "Sonnenblumen", title: "Sonnenblumen", year: "2021", dimensions: "100 x 80 cm", img: { w: 797, h: 524, top: 3283, left: 608 }, caption: { w: 196, top: 3420, left: 350, align: "right" } },
+  { id: 3, smallSrc: smKuechenphilosophie, largeSrc: lgKuechenphilosophie, alt: "Küchenphilosophie", title: "Küchenphilosophie", year: "2022", dimensions: "100 x 100 cm", img: { w: 497, h: 494, top: 3646, left: 68 }, caption: { w: 196, top: 3942, left: 575 } },
+  { id: 4, smallSrc: smPower, largeSrc: lgPower, alt: "power", title: "power", year: "2021", dimensions: "70 x 70 cm", img: { w: 566, h: 600, top: 2010, left: 843 }, caption: { w: 196, top: 2435, left: 639, align: "right" } },
+  { id: 5, smallSrc: smResonanzA, largeSrc: lgOhneTitelA, alt: "Resonanz", title: "Resonanz", year: "2024", dimensions: "je 80 x 40 cm", groupId: "ohne-titel-diptych", img: { w: 301, h: 600, top: 4170, left: 1089 }, caption: { w: 196, top: 4299, left: 467, align: "right" } },
+  { id: 6, smallSrc: smResonanzB, largeSrc: lgOhneTitelB, alt: "Resonanz", title: "", year: "", dimensions: "", groupId: "ohne-titel-diptych", img: { w: 299, h: 600, top: 4170, left: 790 } },
+  { id: 7, smallSrc: smAusbruch, largeSrc: lgAusbruch, alt: "Ausbruch", title: "Ausbruch", year: "2022", dimensions: "70 x 60 cm", img: { w: 706, h: 600, top: 232, left: 31 }, caption: { w: 196, top: 316, left: 812 } },
+  { id: 8, smallSrc: smTanzendeA, largeSrc: lgTanzendeA, alt: "Tanzende", title: "Tanzende", year: "2024", dimensions: "je 80 x 40 cm", groupId: "tanzende", img: { w: 297, h: 600, top: 2610, left: 120 }, caption: { w: 196, top: 2840, left: 861 } },
+  { id: 9, smallSrc: smTanzendeB, largeSrc: lgTanzendeB, alt: "Tanzende b", title: "", year: "", dimensions: "", groupId: "tanzende", img: { w: 297, h: 600, top: 2610, left: 417 } },
+  { id: 10, smallSrc: smEismeer, largeSrc: lgEismeer, alt: "Eismeer", title: "Eismeer", year: "2020", dimensions: "80 x 40 cm", img: { w: 1202, h: 600, top: 1166, left: 68 }, caption: { w: 196, top: 1409, left: 1291 } },
+  { id: 11, smallSrc: smZaghaft, largeSrc: lgZaghaft, alt: "Zaghaft beginnt etwas Neues", title: "Zaghaft beginnt etwas Neues", year: "2021", dimensions: "70 x 70 cm", img: { w: 511, h: 499, top: 1839, left: 13 }, caption: { w: 196, top: 1918, left: 566 } },  
+  { id: 12, smallSrc: smFruehling, largeSrc: lgFruehling, alt: "Frühling", title: "Frühling", year: "2020", dimensions: "70 x 70 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 13, smallSrc: smAufbruch, largeSrc: lgAufbruch, alt: "Aufbruch", title: "Aufbruch", year: "2024", dimensions: "100 x 100 cm", img: { w: 781, h: 782, top: 4800, left: 26 }, caption: { w: 196, top: 5275, left: 965 } },
+  { id: 14, smallSrc: smSpuren, largeSrc: lgSpuren, alt: "Spuren", title: "Spuren", year: "2022", dimensions: "100 x 100 cm", img: { w: 776, h: 781, top: 6300, left: 333 }, caption: { w: 196, top: 6415, left: 1173 } },
+  { id: 15, smallSrc: smVonderDunkelheit, largeSrc: lgFruehling, alt: "Von der Dunkelheit ins Licht", title: "Von der Dunkelheit ins Licht", year: "2025", dimensions: "80 x 80 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 16, smallSrc: smAufloesung, largeSrc: smAufloesung, alt: "Auflösung in blau", title: "Auflösung in blau", year: "2022", dimensions: "70 x 70 cm", img: { w: 776, h: 781, top: 6300, left: 333 }, caption: { w: 196, top: 6415, left: 1173 } },
+  { id: 17, smallSrc: smKleineAufruhr, largeSrc: lgFruehling, alt: "Kleine Aufruhr", title: "Kleine Aufruhr", year: "2026", dimensions: "60 x 70 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 18, smallSrc: smRiff, largeSrc: lgFruehling, alt: "Riff", title: "Riff", year: "2021", dimensions: "80 x 60 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 19, smallSrc: smEismeerII, largeSrc: smEismeerII, alt: "Eismeer II", title: "Eismeer II", year: "2024", dimensions: "50 x 100 cm", img: { w: 776, h: 781, top: 6300, left: 333 }, caption: { w: 196, top: 6415, left: 1173 } },
+  { id: 20, smallSrc: smTiefseetraum, largeSrc: lgFruehling, alt: "Tiefseetraum", title: "Tiefseetraum", year: "2020", dimensions: "80 x 80 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 21, smallSrc: smUnterwasserwunder, largeSrc: lgFruehling, alt: "Unterwasserwunder", title: "Unterwasserwunder", year: "2025", dimensions: "140 x 70 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 22, smallSrc: smAufruhr, largeSrc: lgFruehling, alt: "Aufruhr", title: "Aufruhr", year: "2025", dimensions: "140 x 70 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 23, smallSrc: smFarbedrängt, largeSrc: lgFruehling, alt: "Farbe drängt zwischen Hitze und Form", title: "Farbe drängt zwischen Hitze und Form", year: "2024", dimensions: "100 x 100 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 24, smallSrc: smWennBewegung, largeSrc: lgFruehling, alt: "Wenn Bewegung bleibt", title: "Wenn Bewegung bleibt", year: "2024", dimensions: "100 x 100 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 25, smallSrc: smZustandeines, largeSrc: lgFruehling, alt: "Zustand eines Himmels", title: "Zustand eines Himmels", year: "2025", dimensions: "120 x 100 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  { id: 26, smallSrc: smFokus, largeSrc: lgFruehling, alt: "Fokus", title: "Fokus", year: "2026", dimensions: "100 x 100 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+  {
+    id: 1,
+    smallSrc: smAufbruchI,
+    largeSrc: lgAufbruchI,
+    alt: "Ausbruch",
+    title: "Ausbruch",
+    year: "2022",
+    dimensions: "70 x 60 cm",
+    img: { w: 706, h: 600, top: 232, left: 31 },
+    caption: { w: 196, top: 316, left: 812 },
+  },
+  {
+    id: 2,
+    smallSrc: smFruehling,
+    largeSrc: lgFruehling,
+    alt: "Frühling",
+    title: "Frühling",
+    year: "2020",
+    dimensions: "70 x 70 cm",
+    img: { w: 491, h: 486, top: 647, left: 918 },
+    caption: { w: 196, top: 965, left: 704, align: "right" },
+  },
+  {
+    id: 3,
+    smallSrc: smEismeer,
+    largeSrc: lgEismeer,
+    alt: "Eismeer",
+    title: "Eismeer",
+    year: "2020",
+    dimensions: "80 x 40 cm",
+    img: { w: 1202, h: 600, top: 1166, left: 68 },
+    caption: { w: 196, top: 1409, left: 1291 },
+  },
+  {
+    id: 4,
+    smallSrc: smZaghaft,
+    largeSrc: lgZaghaft,
+    alt: "Zaghaft beginnt etwas Neues",
+    title: "Zaghaft beginnt etwas Neues",
+    year: "2021",
+    dimensions: "70 x 70 cm",
+    img: { w: 511, h: 499, top: 1839, left: 13 },
+    caption: { w: 196, top: 1918, left: 566 },
+  },
+  {
+    id: 5,
+    smallSrc: smPower,
+    largeSrc: lgPower,
+    alt: "power",
+    title: "power",
+    year: "2021",
+    dimensions: "70 x 70 cm",
+    img: { w: 566, h: 600, top: 2010, left: 843 },
+    caption: { w: 196, top: 2435, left: 639, align: "right" },
+  },
+  {
+    id: 6,
+    smallSrc: smTanzendeA,
+    largeSrc: lgTanzendeA,
+    alt: "Tanzende",
+    title: "Tanzende",
+    year: "2024",
+    dimensions: "je 80 x 40 cm",
+    img: { w: 297, h: 600, top: 2610, left: 120 },
+    caption: { w: 196, top: 2840, left: 861 },
+    groupId: "tanzende",
+  },
+  {
+    id: 7,
+    smallSrc: smTanzendeB,
+    largeSrc: lgTanzendeB,
+    alt: "Tanzende b",
+    title: "",
+    year: "",
+    dimensions: "",
+    img: { w: 297, h: 600, top: 2610, left: 417 },
+    groupId: "tanzende",
+  },
+  {
+    id: 8,
+    smallSrc: smSonnenblumen,
+    largeSrc: lgSonnenblumen,
+    alt: "Sonnenblumen",
+    title: "Sonnenblumen",
+    year: "2021",
+    dimensions: "100 x 80 cm",
+    img: { w: 797, h: 524, top: 3283, left: 608 },
+    caption: { w: 196, top: 3420, left: 350, align: "right" },
+  },
+  {
+    id: 9,
+    smallSrc: smKuechenphilosophie,
+    largeSrc: lgKuechenphilosophie,
+    alt: "Küchenphilosophie",
+    title: "Küchenphilosophie",
+    year: "2022",
+    dimensions: "100 x 100 cm",
+    img: { w: 497, h: 494, top: 3646, left: 68 },
+    caption: { w: 196, top: 3942, left: 575 },
+  },
+  {
+    id: 10,
+    smallSrc: smOhneTitelA,
+    largeSrc: lgOhneTitelA,
+    alt: "Resonanz",
+    title: "Resonanz",
+    year: "2024",
+    dimensions: "je 80 x 40 cm",
+    img: { w: 301, h: 600, top: 4170, left: 1089 },
+    caption: { w: 196, top: 4299, left: 467, align: "right" },
+    groupId: "ohne-titel-diptych",
+  },
+  {
+    id: 11,
+    smallSrc: smOhneTitelB,
+    largeSrc: lgOhneTitelB,
+    alt: "Resonanz",
+    title: "",
+    year: "",
+    dimensions: "",
+    img: { w: 299, h: 600, top: 4170, left: 790 },
+    groupId: "ohne-titel-diptych",
+  },
+  {
+    id: 12,
+    smallSrc: smAufbruchII,
+    largeSrc: lgAufbruchII,
+    alt: "Aufbruch",
+    title: "Aufbruch",
+    year: "2024",
+    dimensions: "100 x 100 cm",
+    img: { w: 781, h: 782, top: 4800, left: 26 },
+    caption: { w: 196, top: 5275, left: 965 },
+  },
+  {
+    id: 13,
+    smallSrc: smOhneTitel1,
+    largeSrc: lgOhneTitel1,
+    alt: "Sandmeer",
+    title: "Sandmeer",
+    year: "2025",
+    dimensions: "120 x 100 cm",
+    img: { w: 904, h: 600, top: 5612, left: 524 },
+    caption: { w: 196, top: 6016, left: 302, align: "right" },
+  },
+  {
+    id: 14,
+    smallSrc: smSpuren,
+    largeSrc: lgSpuren,
+    alt: "Spuren",
+    title: "Spuren",
+    year: "2022",
+    dimensions: "100 x 100 cm",
+    img: { w: 776, h: 781, top: 6300, left: 333 },
+    caption: { w: 196, top: 6415, left: 1173 },
+  },
 ];
 
 // ─── Canvas reference dimensions ─────────────────────────────────────────────
@@ -83,7 +272,7 @@ const artworks: Artwork[] = [
     original design size on very wide screens.
 */
 const DW = 1440; // desktop canvas width  (px)
-const DH = 6400; // desktop canvas height (px)
+const DH = 7700; // desktop canvas height (px)
 const MW = 390; // mobile  canvas width  (px)
 const MH = 3450; // mobile  canvas height (px)
 // last artwork bottom: id=14 top 3034 + h 283 = 3317 px; +133 buffer
@@ -107,7 +296,7 @@ const mtp = (px: number) => `${(px / MH) * 100}%`;
 */
 type MobileItem = {
   id: number;
-  img: { w: number; top: number; left: number };
+  img: { w: number; h: number; top: number; left: number };
   objectFit: "cover" | "contain";
   caption: {
     w: number;
@@ -119,58 +308,88 @@ type MobileItem = {
 
 const mobileLayout: MobileItem[] = [
   {
-    id: 4,
-    objectFit: "contain",
-    img: { w: 278, top: 75, left: 13 },
+    id: 1,
+    objectFit: "cover",
+    img: { w: 278, h: 236, top: 75, left: 13 },
     caption: { w: 79, top: 95, left: 311, align: "left" },
   },
   {
-    id: 13,
-    objectFit: "contain",
-    img: { w: 247, top: 353, left: 137 },
+    id: 2,
+    objectFit: "cover",
+    img: { w: 247, h: 244, top: 353, left: 137 },
     caption: { w: 100, top: 420, left: 30, align: "right" },
   },
   {
-    id: 10,
-    objectFit: "contain",
-    img: { w: 300, top: 609, left: 12 },
-    caption: { w: 66, top: 690, left: 310, align: "left" },
+    id: 3,
+    objectFit: "cover",
+    img: { w: 315, h: 157, top: 609, left: 12 },
+    caption: { w: 66, top: 654, left: 328, align: "left" },
   },
   {
-    id: 19,
+    id: 4,
     objectFit: "contain",
-    img: { w: 280, top: 740, left: 100 },
-    caption: { w: 100, top: 850, left: -8, align: "right" },
+    img: { w: 280, h: 273, top: 801, left: 0 },
+    caption: { w: 100, top: 850, left: 290, align: "left" },
   },
   {
-    id: 16,
-    objectFit: "contain",
-    img: { w: 250, top: 1000, left: 12 },
-    caption: { w: 80, top: 1210, left: 300, align: "left" },
+    id: 5,
+    objectFit: "cover",
+    img: { w: 302, h: 320, top: 1127, left: 82 },
+    caption: { w: 80, top: 1210, left: -5, align: "right" },
   },
   {
-    id: 2,
+    id: 6,
     objectFit: "contain",
-    img: { w: 290, top: 1330, left: 100 },
-    caption: { w: 85, top: 1350, left: 11, align: "right" },
-  },
-  {
-    id: 14,
-    objectFit: "contain",
-    img: { w: 276, top: 1600, left: 0 },
-    caption: { w: 95, top: 1690, left: 295, align: "left" },
-  },
-  {
-    id: 1,
-    objectFit: "contain",
-    img: { w: 350, top: 1890, left: 80 },
-    caption: { w: 75, top: 1980, left: 8, align: "right" },
+    img: { w: 135, h: 272, top: 1473, left: 11 },
+    caption: { w: 90, top: 1648, left: 301, align: "left" },
   },
   {
     id: 7,
     objectFit: "contain",
-    img: { w: 281, top: 2100, left: 25 },
-    caption: { w: 75, top: 2167, left: 320, align: "left" },
+    img: { w: 138, h: 272, top: 1473, left: 154 },
+    caption: null,
+  },
+  {
+    id: 8,
+    objectFit: "cover",
+    img: { w: 290, h: 194, top: 1753, left: 100 },
+    caption: { w: 85, top: 1780, left: 11, align: "right" },
+  },
+  {
+    id: 9,
+    objectFit: "cover",
+    img: { w: 254, h: 252, top: 1961, left: 5 },
+    caption: { w: 108, top: 2095, left: 271, align: "left" },
+  },
+  {
+    id: 10,
+    objectFit: "contain",
+    img: { w: 131, h: 261, top: 2243, left: 254 },
+    caption: { w: 110, top: 2350, left: 5, align: "right" },
+  },
+  {
+    id: 11,
+    objectFit: "contain",
+    img: { w: 130, h: 261, top: 2243, left: 121 },
+    caption: null,
+  },
+  {
+    id: 12,
+    objectFit: "cover",
+    img: { w: 276, h: 276, top: 2530, left: 0 },
+    caption: { w: 95, top: 2617, left: 295, align: "left" },
+  },
+  {
+    id: 13,
+    objectFit: "cover",
+    img: { w: 286, h: 190, top: 2814, left: 88 },
+    caption: { w: 75, top: 2832, left: 8, align: "right" },
+  },
+  {
+    id: 14,
+    objectFit: "cover",
+    img: { w: 281, h: 283, top: 3034, left: 11 },
+    caption: { w: 75, top: 3167, left: 306, align: "left" },
   },
 ];
 
@@ -464,7 +683,7 @@ export function HomePage(): JSX.Element {
             <ContactSection
               className="absolute"
               style={{
-                top: dtp(6000),
+                top: dtp(7205),
                 left: "50%",
                 transform: "translateX(-50%)",
                 width: dlp(560),

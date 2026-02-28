@@ -59,18 +59,19 @@ export function Contact(): JSX.Element {
               Original width: 167 px inside ~366 px content area (390 - 24 px padding)
               167 / 366 ≈ 45.6 % → use 45 % to leave breathing room
             */}
-            <div className="w-[45%] flex-shrink-0 [font-family:'Antonio',Helvetica] font-normal text-black text-base text-center tracking-[-0.05px] leading-6">
+            <div className="mt-20 w-[45%] flex-shrink-0 [font-family:'Antonio',Helvetica] font-normal text-black text-base text-center tracking-[-0.05px] leading-6">
               Bei Interesse an meinen Bildern freue ich mich über eine E-Mail:
-              <a
-                href="mailto:kontakt@sabinehansen.art"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="block mt-3 underline text-black hover:text-[#854686] transition-colors"
-              >
-                kontakt@sabinehansen.art
-              </a>
             </div>
-
+            <ContactSectionMobile
+              className="absolute mt-0 w-full"
+              style={{
+                top: tp(550),
+                left: lp(50),
+                width: lp(600),
+              }}
+              showName={false}
+              showLocation={false}
+            />
             {/*
               Image column
               Original size: 186 × 353 px → aspect ratio 186 ∶ 353
@@ -86,9 +87,6 @@ export function Contact(): JSX.Element {
             </div>
           </div>
         </div>
-
-        {/* ── Footer contact block ─────────────────────────────────────── */}
-        <ContactSectionMobile className="mt-6 w-full" />
       </div>
 
       {/* ════════════════════════════════════════════════════════════════════
