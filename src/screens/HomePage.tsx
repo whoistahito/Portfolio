@@ -9,7 +9,7 @@ import {
 import { ContactSection } from "../components/ContactSection";
 import ContactSectionMobile from "../components/ContactSectionMobile";
 
-// ─── Image imports 1, 2, 4, 7, 10, 13, 14, 16, 19 ────────────────────────────────────────────────────────────
+// ─── Image imports ────────────────────────────────────────────────────────────
 import smSandmeer from "../assets/optimized/sm/1-Sandmeer-sm.webp";
 import smSonnenblumen from "../assets/optimized/sm/2-Sonnenblumen-sm.webp";
 import smPower from "../assets/optimized/sm/4-power-sm.webp";
@@ -30,15 +30,222 @@ type Artwork = {
   year: string;
   dimensions: string;
   groupId?: string;
-  /** Desktop absolute coords (px, reference canvas 1440 × 7700) */
-  img: { w: number; top: number; left: number };
-  /** Desktop caption coords (px, same reference canvas) */
-  caption?: { w?: number; top: number; left: number; align?: "right" | "left" };
 };
+
+/**
+ * Caption position relative to its image.
+ * All values are CSS strings so you can use any unit (%, px, rem, etc.).
+ *
+ * - `mt` / `mr` / `mb` / `ml` — margin offsets applied to the caption wrapper
+ * - `alignSelf` — vertical alignment within the flex row
+ *   ("flex-start" = top, "center" = middle, "flex-end" = bottom)
+ */
+type CaptionPosition = {
+  mt?: string;
+  mr?: string;
+  mb?: string;
+  ml?: string;
+  alignSelf?: "flex-start" | "center" | "flex-end";
+};
+
+/**
+ * Desktop layout item — positions are expressed as percentages of a 1440px-wide
+ * reference canvas. No fixed canvas height; the page grows with content.
+ *
+ * - `widthPct`:      image width as % of container width
+ * - `marginLeftPct`: horizontal offset as % of container width
+ * - `marginTopPct`:  vertical spacing from previous item as % of container width
+ *                    (using width as the basis keeps proportions when the
+ *                     container scales — same trick CSS padding-top uses)
+ * - `captionSide`:   which side the caption sits on relative to the image
+ * - `captionPos`:    fine-tune caption position relative to its default spot (see `CaptionPosition`)
+ */
+type DesktopLayoutItem = {
+  id: number;
+  widthPct: number;
+  marginLeftPct: number;
+  marginTopPct: number;
+  captionSide: "left" | "right";
+  captionPos?: CaptionPosition;
+};
+
+/**
+ * Mobile layout item — simpler staggered layout.
+ * widthPct and marginLeftPct are relative to the mobile container width.
+ * marginTopRem uses rem for consistent spacing across devices.
+ *
+ * - `captionPos`: fine-tune caption position relative to its default spot (see `CaptionPosition`)
+ */
+type MobileLayoutItem = {
+  id: number;
+  widthPct: number;
+  marginLeftPct: number;
+  marginTopRem: number;
+  captionSide: "left" | "right";
+  captionPos?: CaptionPosition;
+};
+
+// ─── Reference canvas width for computing percentages ─────────────────────────
+const REF_W = 1440;
+
+/** Convert a pixel value (designed at 1440px) to a percentage of REF_W */
+const pct = (px: number) => (px / REF_W) * 100;
+
+// ─── Desktop layout data ──────────────────────────────────────────────────────
+/*
+ * Each item's position was derived from the original absolute-positioned coords
+ * on a 1440px canvas. The vertical spacing (marginTopPct) is tuned so that the
+ * visual rhythm — overlaps, gaps — matches the original design, but now the
+ * container's height is fully determined by content flow.
+ *
+ * Original coords (for reference):
+ *   id=4:  left=843, w=566,  top=232
+ *   id=13: left=26,  w=700,  top=600
+ *   id=10: left=530, w=900,  top=1340
+ *   id=19: left=33,  w=850,  top=1870
+ *   id=16: left=600, w=670,  top=2300
+ *   id=2:  left=10,  w=797,  top=3000
+ *   id=14: left=760, w=650,  top=3600
+ *   id=1:  left=200, w=904,  top=4400
+ *   id=7:  left=640, w=706,  top=5050
+ */
+const desktopLayout: DesktopLayoutItem[] = [
+  {
+    id: 4,
+    widthPct: pct(750),
+    marginLeftPct: pct(843),
+    marginTopPct: pct(232),
+    captionSide: "left",
+    captionPos: { alignSelf: "flex-start" },
+  },
+  {
+    id: 13,
+    widthPct: pct(700),
+    marginLeftPct: pct(26),
+    marginTopPct: pct(-100),
+    captionSide: "right",
+  },
+  {
+    id: 10,
+    widthPct: pct(900),
+    marginLeftPct: pct(530),
+    marginTopPct: pct(0),
+    captionSide: "left",
+  },
+  {
+    id: 19,
+    widthPct: pct(850),
+    marginLeftPct: pct(33),
+    marginTopPct: pct(20),
+    captionSide: "right",
+  },
+  {
+    id: 16,
+    widthPct: pct(670),
+    marginLeftPct: pct(600),
+    marginTopPct: pct(20),
+    captionSide: "left",
+  },
+  {
+    id: 2,
+    widthPct: pct(797),
+    marginLeftPct: pct(10),
+    marginTopPct: pct(0),
+    captionSide: "right",
+  },
+  {
+    id: 14,
+    widthPct: pct(650),
+    marginLeftPct: pct(760),
+    marginTopPct: pct(5),
+    captionSide: "left",
+  },
+  {
+    id: 1,
+    widthPct: pct(904),
+    marginLeftPct: pct(50),
+    marginTopPct: pct(25),
+    captionSide: "right",
+  },
+  {
+    id: 7,
+    widthPct: pct(706),
+    marginLeftPct: pct(640),
+    marginTopPct: pct(40),
+    captionSide: "left",
+  },
+];
+
+// ─── Mobile layout data ──────────────────────────────────────────────────────
+const mobileLayout: MobileLayoutItem[] = [
+  {
+    id: 4,
+    widthPct: 85,
+    marginLeftPct: 3,
+    marginTopRem: 5,
+    captionSide: "right",
+    captionPos: { mt: "20%", ml: "-1rem" },
+  },
+  {
+    id: 13,
+    widthPct: 80,
+    marginLeftPct: 20,
+    marginTopRem: 1.5,
+    captionSide: "left",
+  },
+  {
+    id: 10,
+    widthPct: 100,
+    marginLeftPct: 3,
+    marginTopRem: 1.5,
+    captionSide: "right",
+  },
+  {
+    id: 19,
+    widthPct: 100,
+    marginLeftPct: 0,
+    marginTopRem: 1,
+    captionSide: "left",
+  },
+  {
+    id: 16,
+    widthPct: 85,
+    marginLeftPct: 3,
+    marginTopRem: 1.5,
+    captionSide: "right",
+  },
+  {
+    id: 2,
+    widthPct: 85,
+    marginLeftPct: 10,
+    marginTopRem: 1.5,
+    captionSide: "left",
+  },
+  {
+    id: 14,
+    widthPct: 71,
+    marginLeftPct: 0,
+    marginTopRem: 1.5,
+    captionSide: "right",
+  },
+  {
+    id: 1,
+    widthPct: 95,
+    marginLeftPct: 5,
+    marginTopRem: 1.5,
+    captionSide: "left",
+  },
+  {
+    id: 7,
+    widthPct: 95,
+    marginLeftPct: 6,
+    marginTopRem: 1.5,
+    captionSide: "right",
+  },
+];
 
 // ─── Artwork data ─────────────────────────────────────────────────────────────
 const artworks: Artwork[] = [
-  // Restore the vertical position of the first artwork so it sits closer to the header like before
   {
     id: 4,
     smallSrc: smPower,
@@ -47,10 +254,7 @@ const artworks: Artwork[] = [
     title: "power",
     year: "2021",
     dimensions: "70 x 70 cm",
-    img: { w: 566, top: 232, left: 843 },
-    caption: { w: 196, top: 316, left: 639, align: "right" },
   },
-
   {
     id: 13,
     smallSrc: smAufbruch,
@@ -59,10 +263,7 @@ const artworks: Artwork[] = [
     title: "Aufbruch",
     year: "2024",
     dimensions: "100 x 100 cm",
-    img: { w: 700, top: 600, left: 26 },
-    caption: { w: 196, top: 1100, left: 800 },
   },
-
   {
     id: 10,
     smallSrc: smEismeer,
@@ -71,10 +272,7 @@ const artworks: Artwork[] = [
     title: "Eismeer",
     year: "2020",
     dimensions: "80 x 40 cm",
-    img: { w: 900, top: 1340, left: 530 },
-    caption: { w: 196, top: 1600, left: 200, align: "right" },
   },
-
   {
     id: 19,
     smallSrc: smEismeerII,
@@ -83,10 +281,7 @@ const artworks: Artwork[] = [
     title: "Eismeer II",
     year: "2024",
     dimensions: "100 x 50 cm",
-    img: { w: 850, top: 1870, left: 33 },
-    caption: { w: 196, top: 1900, left: 1000 },
   },
-
   {
     id: 16,
     smallSrc: smAufloesung,
@@ -95,10 +290,7 @@ const artworks: Artwork[] = [
     title: "Auflösung in blau",
     year: "2022",
     dimensions: "70 x 70 cm",
-    img: { w: 670, top: 2300, left: 600 },
-    caption: { w: 196, top: 2800, left: 350, align: "right" },
   },
-
   {
     id: 2,
     smallSrc: smSonnenblumen,
@@ -107,10 +299,7 @@ const artworks: Artwork[] = [
     title: "Sonnenblumen",
     year: "2021",
     dimensions: "100 x 80 cm",
-    img: { w: 797, top: 3000, left: 10 },
-    caption: { w: 196, top: 3200, left: 815 },
   },
-
   {
     id: 14,
     smallSrc: smSpuren,
@@ -119,10 +308,7 @@ const artworks: Artwork[] = [
     title: "Spuren",
     year: "2022",
     dimensions: "100 x 100 cm",
-    img: { w: 650, top: 3600, left: 760 },
-    caption: { w: 196, top: 3700, left: 300, align: "right" },
   },
-
   {
     id: 1,
     smallSrc: smSandmeer,
@@ -131,10 +317,7 @@ const artworks: Artwork[] = [
     title: "Sandmeer",
     year: "2025",
     dimensions: "120 x 100 cm",
-    img: { w: 904, top: 4400, left: 200 },
-    caption: { w: 196, top: 4800, left: 1150 },
   },
-
   {
     id: 7,
     smallSrc: smAusbruch,
@@ -143,106 +326,34 @@ const artworks: Artwork[] = [
     title: "Ausbruch",
     year: "2022",
     dimensions: "70 x 60 cm",
-    img: { w: 706, top: 5050, left: 640 },
-    caption: { w: 196, top: 5316, left: 239, align: "right" },
   },
 ];
 
-// ─── Canvas reference dimensions ─────────────────────────────────────────────
-/*
-  Desktop: every pixel coord in `artworks` was designed for a 1440 × 7700 px canvas.
-  Mobile:  every pixel coord in `mobileLayout` was designed for a 390 × 3450 px canvas.
-
-  Responsive technique: "padding-top trick"
-    A `position:relative` container with `padding-top: (H/W)*100%` always has
-    height = (H/W) × its own width — i.e. it maintains the H∶W aspect ratio.
-    Children live inside an `absolute inset-0` layer and are positioned with
-    %-values derived from the reference canvas dimensions.
-
-    CSS min() caps the physical pixel height so the layout never exceeds the
-    original design size on very wide screens.
-*/
-const DW = 1440; // desktop canvas width  (px)
-const DH = 6400; // desktop canvas height (px)
-const MW = 390; // mobile  canvas width  (px)
-const MH = 2400; // mobile  canvas height (px)
-// last artwork bottom: id=14 top 3034 + h 283 = 3317 px; +133 buffer
-
-/** original px → % of desktop canvas width  (use for `left` and `width`)  */
-const dlp = (px: number) => `${(px / DW) * 100}%`;
-/** original px → % of desktop canvas height (use for `top`  and `height`) */
-const dtp = (px: number) => `${(px / DH) * 100}%`;
-/** original px → % of mobile canvas width   (use for `left` and `width`)  */
-const mlp = (px: number) => `${(px / MW) * 100}%`;
-/** original px → % of mobile canvas height  (use for `top`  and `height`) */
-const mtp = (px: number) => `${(px / MH) * 100}%`;
-
-// ─── Mobile layout data ───────────────────────────────────────────────────────
-/*
-  All pixel coords were extracted from the original hardcoded mobile markup
-  (reference canvas 390 × 3450 px).  Heights that were originally `h-auto` or
-  a Tailwind class like `h-80` are converted to explicit pixels:
-    • id=4  was `h-auto`  → computed from desktop aspect ratio 499/511 × 280 ≈ 273 px
-    • id=5  was `h-80`    → 320 px  (Tailwind h-80 = 20rem = 320 px)
-*/
-type MobileItem = {
-  id: number;
-  img: { w: number; top: number; left: number };
-  caption: {
-    w: number;
-    top: number;
-    left: number;
-    align: "left" | "right";
-  } | null;
-};
-
-const mobileLayout: MobileItem[] = [
-  {
-    id: 4,
-    img: { w: 278, top: 75, left: 13 },
-    caption: { w: 79, top: 95, left: 311, align: "left" },
-  },
-  {
-    id: 13,
-    img: { w: 247, top: 353, left: 137 },
-    caption: { w: 100, top: 420, left: 30, align: "right" },
-  },
-  {
-    id: 10,
-    img: { w: 300, top: 609, left: 12 },
-    caption: { w: 66, top: 690, left: 310, align: "left" },
-  },
-  {
-    id: 19,
-    img: { w: 280, top: 740, left: 100 },
-    caption: { w: 100, top: 850, left: -8, align: "right" },
-  },
-  {
-    id: 16,
-    img: { w: 250, top: 1000, left: 12 },
-    caption: { w: 80, top: 1210, left: 300, align: "left" },
-  },
-  {
-    id: 2,
-    img: { w: 290, top: 1330, left: 100 },
-    caption: { w: 85, top: 1350, left: 11, align: "right" },
-  },
-  {
-    id: 14,
-    img: { w: 276, top: 1600, left: 0 },
-    caption: { w: 95, top: 1690, left: 295, align: "left" },
-  },
-  {
-    id: 1,
-    img: { w: 350, top: 1890, left: 80 },
-    caption: { w: 75, top: 1980, left: 8, align: "right" },
-  },
-  {
-    id: 7,
-    img: { w: 281, top: 2100, left: 25 },
-    caption: { w: 75, top: 2167, left: 320, align: "left" },
-  },
-];
+// ─── Caption sub-component ────────────────────────────────────────────────────
+function ArtworkCaption({
+  art,
+  mobile,
+}: {
+  art: Artwork;
+  mobile?: boolean;
+}): JSX.Element | null {
+  if (!art.title) return null;
+  return (
+    <div
+      className="[font-family:'Antonio',Helvetica] text-black shrink-0"
+      style={{
+        fontSize: mobile
+          ? "clamp(0.65rem, 4.1vw, 1rem)"
+          : "clamp(0.75rem, 1.11vw, 1rem)",
+        lineHeight: 1.2,
+      }}
+    >
+      <div className="font-normal">{art.title}</div>
+      <div className="font-thin">{art.year}</div>
+      <div className="font-thin">{art.dimensions}</div>
+    </div>
+  );
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export function HomePage(): JSX.Element {
@@ -395,74 +506,60 @@ export function HomePage(): JSX.Element {
           MOBILE GALLERY  (hidden at ≥ 768 px)
           ══════════════════════════════════════════════════════════════════
 
-          The canvas is a `position:relative` box whose height is always
-          (MH / MW) × its own width — i.e. the exact 390 × 3450 proportions.
-          CSS min() prevents it growing beyond 3450 px on unusually wide phones.
-          All 14 artwork images and their captions sit inside the
-          `absolute inset-0` layer at %-based coordinates.
+          Flow layout: each artwork is a flex row (image + caption).
+          Horizontal offset via margin-left %, width via %, vertical
+          spacing via margin-top in rem. No absolute positioning,
+          no fixed container height — the page grows with content.
       */}
-      <div className="md:hidden bg-[#d4cdc4] w-full pt-5">
-        {/* ── Gallery canvas ───────────────────────────────────────────── */}
-        <div
-          className="relative w-full overflow-hidden"
-          style={{ paddingTop: `min(${MH}px, ${(MH / MW) * 100}%)` }}
-        >
-          <div className="absolute inset-0">
-            {mobileLayout.map((item) => {
-              const artIdx = artworks.findIndex((a) => a.id === item.id);
-              const art = artworks[artIdx];
-              return (
-                <div key={item.id}>
-                  {/* Artwork image */}
-                  <img
-                    src={art.smallSrc}
-                    alt={art.alt}
-                    loading="lazy"
-                    className="absolute cursor-pointer"
-                    style={{
-                      left: mlp(item.img.left),
-                      top: mtp(item.img.top),
-                      width: mlp(item.img.w),
-                      height: "auto",
-                    }}
-                    onClick={() => openPreview(artIdx)}
-                  />
+      <div className="md:hidden bg-[#d4cdc4] w-full px-2 pt-5 pb-8 overflow-hidden">
+        {mobileLayout.map((item) => {
+          const artIdx = artworks.findIndex((a) => a.id === item.id);
+          const art = artworks[artIdx];
 
-                  {/* Caption (only when the artwork has a title) */}
-                  {item.caption && art.title && (
-                    <div
-                      className="absolute [font-family:'Antonio',Helvetica] font-normal text-black"
-                      style={{
-                        left: mlp(item.caption.left),
-                        top: mtp(item.caption.top),
-                        width: mlp(item.caption.w),
-                        textAlign: item.caption.align,
-                        /*
-                          Font size scales with viewport width so captions
-                          remain proportional to the canvas.
-                          clamp floor (0.65 rem) prevents text becoming illegible
-                          on very narrow screens.
-                          4.1 vw  ≈  16 px at 390 px viewport width.
-                        */
-                        fontSize: "clamp(0.65rem, 4.1vw, 1rem)",
-                        lineHeight: 1.2,
-                        zIndex: 10,
-                      }}
-                    >
-                      {art.title}
-                      <br />
-                      <span className="font-thin">
-                        {art.year}
-                        <br />
-                        {art.dimensions}
-                      </span>
-                    </div>
-                  )}
+          const isRight = item.captionSide === "right";
+
+          return (
+            <div
+              key={item.id}
+              className="flex items-start gap-2"
+              style={{
+                width: `${item.widthPct}%`,
+                marginLeft: `${item.marginLeftPct}%`,
+                marginTop: `${item.marginTopRem}rem`,
+                flexDirection: isRight ? "row" : "row-reverse",
+              }}
+            >
+              {/* Image */}
+              <img
+                src={art.smallSrc}
+                alt={art.alt}
+                loading="lazy"
+                className="w-full h-auto cursor-pointer flex-1 min-w-0"
+                onClick={() => openPreview(artIdx)}
+              />
+
+              {/* Caption */}
+              {art.title && (
+                <div
+                  className="flex items-start"
+                  style={{
+                    writingMode: "horizontal-tb",
+                    minWidth: "5rem",
+                    maxWidth: "6rem",
+                    textAlign: isRight ? "left" : "right",
+                    marginTop: item.captionPos?.mt,
+                    marginRight: item.captionPos?.mr,
+                    marginBottom: item.captionPos?.mb,
+                    marginLeft: item.captionPos?.ml,
+                    alignSelf: item.captionPos?.alignSelf,
+                  }}
+                >
+                  <ArtworkCaption art={art} mobile />
                 </div>
-              );
-            })}
-          </div>
-        </div>
+              )}
+            </div>
+          );
+        })}
 
         {/* ── Contact footer ───────────────────────────────────────────── */}
         <ContactSectionMobile className="mt-6 w-full" />
@@ -472,73 +569,70 @@ export function HomePage(): JSX.Element {
           DESKTOP GALLERY  (hidden below 768 px)
           ══════════════════════════════════════════════════════════════════
 
-          Same padding-top technique, reference canvas 1440 × 7700 px.
-          max-w-[1440px] + mx-auto preserves the intended design at exactly
-          1440 px and centres it on very wide monitors without over-scaling.
-          CSS min() caps the canvas height at its original 7700 px pixel value.
+          Flow layout within a max-w-[1440px] centred container.
+          Each artwork row is positioned using:
+            - margin-left (% of container) for horizontal offset
+            - margin-top  (% of container width) for vertical spacing
+              (can be negative to create overlapping rows)
+            - width       (% of container) for image sizing
+
+          The container has no fixed height — it grows naturally.
+          overflow-hidden clips any artwork that extends past the right edge
+          (intentional for the staggered/overlapping gallery aesthetic).
       */}
       <div className="hidden md:block w-full bg-background">
-        <div
-          className="relative w-full max-w-[1440px] mx-auto overflow-hidden"
-          style={{ paddingTop: `min(${DH}px, ${(DH / DW) * 100}%)` }}
-        >
-          <div className="absolute inset-0">
-            {/* ── Artwork images ─────────────────────────────────────── */}
-            {artworks.map((artwork, idx) => (
-              <img
-                key={artwork.id}
-                src={artwork.smallSrc}
-                alt={artwork.alt}
-                loading="lazy"
-                className="absolute cursor-pointer"
+        <div className="w-full max-w-[1440px] mx-auto overflow-hidden pb-16">
+          {desktopLayout.map((item) => {
+            const artIdx = artworks.findIndex((a) => a.id === item.id);
+            const art = artworks[artIdx];
+
+            const isRight = item.captionSide === "right";
+
+            return (
+              <div
+                key={item.id}
+                className="flex items-start"
                 style={{
-                  left: dlp(artwork.img.left),
-                  top: dtp(artwork.img.top),
-                  width: dlp(artwork.img.w),
-                  height: "auto",
+                  width: `${item.widthPct}%`,
+                  marginLeft: `${item.marginLeftPct}%`,
+                  marginTop: `${item.marginTopPct}%`,
+                  flexDirection: isRight ? "row" : "row-reverse",
+                  gap: "clamp(0.5rem, 1.5vw, 1.5rem)",
                 }}
-                onClick={() => openPreview(idx)}
-              />
-            ))}
+              >
+                {/* Image */}
+                <img
+                  src={art.smallSrc}
+                  alt={art.alt}
+                  loading="lazy"
+                  className="h-auto cursor-pointer flex-1 min-w-0"
+                  onClick={() => openPreview(artIdx)}
+                />
 
-            {/* ── Captions ───────────────────────────────────────────── */}
-            {artworks.map((artwork) =>
-              artwork.caption ? (
-                <div
-                  key={`cap-${artwork.id}`}
-                  className="absolute [font-family:'Antonio',Helvetica] text-black"
-                  style={{
-                    left: dlp(artwork.caption.left),
-                    top: dtp(artwork.caption.top),
-                    width: dlp(artwork.caption.w ?? 196),
-                    textAlign: artwork.caption.align ?? "left",
-                    /*
-                      1.11 vw ≈ 16 px at 1440 px viewport width.
-                      clamp floor (0.75 rem / 12 px) keeps captions readable
-                      on mid-range screen sizes (roughly 1080 px and below).
-                    */
-                    fontSize: "clamp(0.75rem, 1.11vw, 1rem)",
-                    lineHeight: 1.2,
-                    zIndex: 10,
-                  }}
-                >
-                  <div className="font-normal">{artwork.title}</div>
-                  <div className="font-thin">{artwork.year}</div>
-                  <div className="font-thin">{artwork.dimensions}</div>
-                </div>
-              ) : null,
-            )}
+                {/* Caption — pinned to the side of the image */}
+                {art.title && (
+                  <div
+                    className="shrink-0 flex items-start pt-2"
+                    style={{
+                      width: "clamp(8rem, 13.6%, 196px)",
+                      textAlign: item.captionSide === "left" ? "right" : "left",
+                      marginTop: item.captionPos?.mt,
+                      marginRight: item.captionPos?.mr,
+                      marginBottom: item.captionPos?.mb,
+                      marginLeft: item.captionPos?.ml,
+                      alignSelf: item.captionPos?.alignSelf,
+                    }}
+                  >
+                    <ArtworkCaption art={art} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
 
-            {/* ── Contact / footer section ───────────────────────────── */}
-            <ContactSection
-              className="absolute"
-              style={{
-                top: dtp(6000),
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: dlp(560),
-              }}
-            />
+          {/* ── Contact / footer section ───────────────────────────── */}
+          <div className="mt-[6%] flex justify-center">
+            <ContactSection className="w-full max-w-[560px]" />
           </div>
         </div>
       </div>
