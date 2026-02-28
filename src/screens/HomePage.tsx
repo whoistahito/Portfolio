@@ -39,33 +39,113 @@ type Artwork = {
 // ─── Artwork data ─────────────────────────────────────────────────────────────
 const artworks: Artwork[] = [
   // Restore the vertical position of the first artwork so it sits closer to the header like before
-   { id: 4, smallSrc: smPower, largeSrc: smPower, alt: "power", title: "power", year: "2021", dimensions: "70 x 70 cm", 
-    img: { w: 566, top: 232, left: 843 }, caption: { w: 196, top: 316, left: 639, align: "right" } },
+  {
+    id: 4,
+    smallSrc: smPower,
+    largeSrc: smPower,
+    alt: "power",
+    title: "power",
+    year: "2021",
+    dimensions: "70 x 70 cm",
+    img: { w: 566, top: 232, left: 843 },
+    caption: { w: 196, top: 316, left: 639, align: "right" },
+  },
 
-  { id: 13, smallSrc: smAufbruch, largeSrc: smAufbruch, alt: "Aufbruch", title: "Aufbruch", year: "2024", dimensions: "100 x 100 cm", 
-    img: { w: 700, top: 600, left: 26 }, caption: { w: 196, top: 1100, left: 800 } },
+  {
+    id: 13,
+    smallSrc: smAufbruch,
+    largeSrc: smAufbruch,
+    alt: "Aufbruch",
+    title: "Aufbruch",
+    year: "2024",
+    dimensions: "100 x 100 cm",
+    img: { w: 700, top: 600, left: 26 },
+    caption: { w: 196, top: 1100, left: 800 },
+  },
 
-  { id: 10, smallSrc: smEismeer, largeSrc: smEismeer, alt: "Eismeer", title: "Eismeer", year: "2020", dimensions: "80 x 40 cm", 
-    img: { w: 900, top: 1340, left: 530 }, caption: { w: 196, top: 1600, left: 200, align: "right" } },
+  {
+    id: 10,
+    smallSrc: smEismeer,
+    largeSrc: smEismeer,
+    alt: "Eismeer",
+    title: "Eismeer",
+    year: "2020",
+    dimensions: "80 x 40 cm",
+    img: { w: 900, top: 1340, left: 530 },
+    caption: { w: 196, top: 1600, left: 200, align: "right" },
+  },
 
-  { id: 19, smallSrc: smEismeerII, largeSrc: smEismeerII, alt: "Eismeer II", title: "Eismeer II", year: "2024", dimensions: "100 x 50 cm", 
-    img: { w: 850, top: 1870, left: 33 }, caption: { w: 196, top: 1900, left: 1000 } },
+  {
+    id: 19,
+    smallSrc: smEismeerII,
+    largeSrc: smEismeerII,
+    alt: "Eismeer II",
+    title: "Eismeer II",
+    year: "2024",
+    dimensions: "100 x 50 cm",
+    img: { w: 850, top: 1870, left: 33 },
+    caption: { w: 196, top: 1900, left: 1000 },
+  },
 
-  { id: 16, smallSrc: smAufloesung, largeSrc: smAufloesung, alt: "Auflösung in blau", title: "Auflösung in blau", year: "2022", dimensions: "70 x 70 cm", 
-    img: { w: 670, top: 2300, left: 600 }, caption: { w: 196, top: 2800, left: 350, align: "right" } },
+  {
+    id: 16,
+    smallSrc: smAufloesung,
+    largeSrc: smAufloesung,
+    alt: "Auflösung in blau",
+    title: "Auflösung in blau",
+    year: "2022",
+    dimensions: "70 x 70 cm",
+    img: { w: 670, top: 2300, left: 600 },
+    caption: { w: 196, top: 2800, left: 350, align: "right" },
+  },
 
-  { id: 2, smallSrc: smSonnenblumen, largeSrc: smSonnenblumen, alt: "Sonnenblumen", title: "Sonnenblumen", year: "2021", dimensions: "100 x 80 cm", 
-    img: { w: 797, top: 3000, left: 10 }, caption: { w: 196, top: 3200, left: 815} },
+  {
+    id: 2,
+    smallSrc: smSonnenblumen,
+    largeSrc: smSonnenblumen,
+    alt: "Sonnenblumen",
+    title: "Sonnenblumen",
+    year: "2021",
+    dimensions: "100 x 80 cm",
+    img: { w: 797, top: 3000, left: 10 },
+    caption: { w: 196, top: 3200, left: 815 },
+  },
 
-  { id: 14, smallSrc: smSpuren, largeSrc: smSpuren, alt: "Spuren", title: "Spuren", year: "2022", dimensions: "100 x 100 cm", 
-    img: { w: 650, top: 3600, left: 760 }, caption: { w: 196, top: 3700, left: 300, align: "right" } },
+  {
+    id: 14,
+    smallSrc: smSpuren,
+    largeSrc: smSpuren,
+    alt: "Spuren",
+    title: "Spuren",
+    year: "2022",
+    dimensions: "100 x 100 cm",
+    img: { w: 650, top: 3600, left: 760 },
+    caption: { w: 196, top: 3700, left: 300, align: "right" },
+  },
 
-  { id: 1, smallSrc: smSandmeer, largeSrc: smSandmeer, alt: "Sandmeer", title: "Sandmeer", year: "2025", dimensions: "120 x 100 cm", 
-    img: { w: 904, top: 4400, left: 200 }, caption: { w: 196, top: 4800, left: 1150 } },
+  {
+    id: 1,
+    smallSrc: smSandmeer,
+    largeSrc: smSandmeer,
+    alt: "Sandmeer",
+    title: "Sandmeer",
+    year: "2025",
+    dimensions: "120 x 100 cm",
+    img: { w: 904, top: 4400, left: 200 },
+    caption: { w: 196, top: 4800, left: 1150 },
+  },
 
-  { id: 7, smallSrc: smAusbruch, largeSrc: smAusbruch, alt: "Ausbruch", title: "Ausbruch", year: "2022", dimensions: "70 x 60 cm", 
-    img: { w: 706, top: 5050, left: 640 }, caption: { w: 196, top: 5316, left: 239, align: "right" } },
-
+  {
+    id: 7,
+    smallSrc: smAusbruch,
+    largeSrc: smAusbruch,
+    alt: "Ausbruch",
+    title: "Ausbruch",
+    year: "2022",
+    dimensions: "70 x 60 cm",
+    img: { w: 706, top: 5050, left: 640 },
+    caption: { w: 196, top: 5316, left: 239, align: "right" },
+  },
 ];
 
 // ─── Canvas reference dimensions ─────────────────────────────────────────────
@@ -85,7 +165,7 @@ const artworks: Artwork[] = [
 const DW = 1440; // desktop canvas width  (px)
 const DH = 6400; // desktop canvas height (px)
 const MW = 390; // mobile  canvas width  (px)
-const MH = 3450; // mobile  canvas height (px)
+const MH = 2400; // mobile  canvas height (px)
 // last artwork bottom: id=14 top 3034 + h 283 = 3317 px; +133 buffer
 
 /** original px → % of desktop canvas width  (use for `left` and `width`)  */
@@ -108,7 +188,6 @@ const mtp = (px: number) => `${(px / MH) * 100}%`;
 type MobileItem = {
   id: number;
   img: { w: number; top: number; left: number };
-  objectFit: "cover" | "contain";
   caption: {
     w: number;
     top: number;
@@ -120,55 +199,46 @@ type MobileItem = {
 const mobileLayout: MobileItem[] = [
   {
     id: 4,
-    objectFit: "contain",
     img: { w: 278, top: 75, left: 13 },
     caption: { w: 79, top: 95, left: 311, align: "left" },
   },
   {
     id: 13,
-    objectFit: "contain",
     img: { w: 247, top: 353, left: 137 },
     caption: { w: 100, top: 420, left: 30, align: "right" },
   },
   {
     id: 10,
-    objectFit: "contain",
     img: { w: 300, top: 609, left: 12 },
     caption: { w: 66, top: 690, left: 310, align: "left" },
   },
   {
     id: 19,
-    objectFit: "contain",
     img: { w: 280, top: 740, left: 100 },
     caption: { w: 100, top: 850, left: -8, align: "right" },
   },
   {
     id: 16,
-    objectFit: "contain",
     img: { w: 250, top: 1000, left: 12 },
     caption: { w: 80, top: 1210, left: 300, align: "left" },
   },
   {
     id: 2,
-    objectFit: "contain",
     img: { w: 290, top: 1330, left: 100 },
     caption: { w: 85, top: 1350, left: 11, align: "right" },
   },
   {
     id: 14,
-    objectFit: "contain",
     img: { w: 276, top: 1600, left: 0 },
     caption: { w: 95, top: 1690, left: 295, align: "left" },
   },
   {
     id: 1,
-    objectFit: "contain",
     img: { w: 350, top: 1890, left: 80 },
     caption: { w: 75, top: 1980, left: 8, align: "right" },
   },
   {
     id: 7,
-    objectFit: "contain",
     img: { w: 281, top: 2100, left: 25 },
     caption: { w: 75, top: 2167, left: 320, align: "left" },
   },
@@ -353,8 +423,7 @@ export function HomePage(): JSX.Element {
                       left: mlp(item.img.left),
                       top: mtp(item.img.top),
                       width: mlp(item.img.w),
-                      height: mtp(item.img.h),
-                      objectFit: item.objectFit,
+                      height: "auto",
                     }}
                     onClick={() => openPreview(artIdx)}
                   />
@@ -421,12 +490,12 @@ export function HomePage(): JSX.Element {
                 src={artwork.smallSrc}
                 alt={artwork.alt}
                 loading="lazy"
-                className="absolute object-cover cursor-pointer"
+                className="absolute cursor-pointer"
                 style={{
                   left: dlp(artwork.img.left),
                   top: dtp(artwork.img.top),
                   width: dlp(artwork.img.w),
-                  height: dtp(artwork.img.h),
+                  height: "auto",
                 }}
                 onClick={() => openPreview(idx)}
               />

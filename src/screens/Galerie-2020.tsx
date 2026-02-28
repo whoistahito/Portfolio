@@ -1,4 +1,3 @@
-
 import {
   useCallback,
   useEffect,
@@ -26,7 +25,7 @@ type Artwork = {
   dimensions: string;
   groupId?: string;
   /** Desktop absolute coords (px, reference canvas 1440 × 7700) */
-  img: { w: number; h: number; top: number; left: number };
+  img: { w: number; top: number; left: number };
   /** Desktop caption coords (px, same reference canvas) */
   caption?: { w?: number; top: number; left: number; align?: "right" | "left" };
 };
@@ -34,9 +33,7 @@ type Artwork = {
 // ─── Artwork data ─────────────────────────────────────────────────────────────
 const artworks: Artwork[] = [
   // Restore the vertical position of the first artwork so it sits closer to the header like before
-  { id: 10, smallSrc: smEismeer, largeSrc: smEismeer, alt: "Eismeer", title: "Eismeer", year: "2020", dimensions: "80 x 40 cm", img: { w: 1202, h: 600, top: 1166, left: 68 }, caption: { w: 196, top: 1409, left: 1291 } },
-  { id: 12, smallSrc: smFruehling, largeSrc: smFruehling, alt: "Frühling", title: "Frühling", year: "2020", dimensions: "70 x 70 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
-  { id: 20, smallSrc: smTiefseetraum, largeSrc: smTiefseetraum, alt: "Tiefseetraum", title: "Tiefseetraum", year: "2020", dimensions: "80 x 80 cm", img: { w: 491, h: 486, top: 647, left: 918 }, caption: { w: 196, top: 965, left: 704, align: "right" } },
+
   {
     id: 10,
     smallSrc: smEismeer,
@@ -111,8 +108,7 @@ const mtp = (px: number) => `${(px / MH) * 100}%`;
 */
 type MobileItem = {
   id: number;
-  img: { w: number; h: number; top: number; left: number };
-  objectFit: "cover" | "contain";
+  img: { w: number; top: number; left: number };
   caption: {
     w: number;
     top: number;
@@ -124,86 +120,72 @@ type MobileItem = {
 const mobileLayout: MobileItem[] = [
   {
     id: 1,
-    objectFit: "cover",
-    img: { w: 278, h: 236, top: 75, left: 13 },
+    img: { w: 278, top: 75, left: 13 },
     caption: { w: 79, top: 95, left: 311, align: "left" },
   },
   {
     id: 2,
-    objectFit: "cover",
-    img: { w: 247, h: 244, top: 353, left: 137 },
+    img: { w: 247, top: 353, left: 137 },
     caption: { w: 100, top: 420, left: 30, align: "right" },
   },
   {
     id: 3,
-    objectFit: "cover",
-    img: { w: 315, h: 157, top: 609, left: 12 },
+    img: { w: 315, top: 609, left: 12 },
     caption: { w: 66, top: 654, left: 328, align: "left" },
   },
   {
     id: 4,
-    objectFit: "contain",
-    img: { w: 280, h: 273, top: 801, left: 0 },
+    img: { w: 280, top: 801, left: 0 },
     caption: { w: 100, top: 850, left: 290, align: "left" },
   },
   {
     id: 5,
-    objectFit: "cover",
-    img: { w: 302, h: 320, top: 1127, left: 82 },
+    img: { w: 302, top: 1127, left: 82 },
     caption: { w: 80, top: 1210, left: -5, align: "right" },
   },
   {
     id: 6,
-    objectFit: "contain",
-    img: { w: 135, h: 272, top: 1473, left: 11 },
+    img: { w: 135, top: 1473, left: 11 },
     caption: { w: 90, top: 1648, left: 301, align: "left" },
   },
   {
     id: 7,
-    objectFit: "contain",
-    img: { w: 138, h: 272, top: 1473, left: 154 },
+    img: { w: 138, top: 1473, left: 154 },
     caption: null,
   },
   {
     id: 8,
-    objectFit: "cover",
-    img: { w: 290, h: 194, top: 1753, left: 100 },
+    img: { w: 290, top: 1753, left: 100 },
     caption: { w: 85, top: 1780, left: 11, align: "right" },
   },
   {
     id: 9,
-    objectFit: "cover",
-    img: { w: 254, h: 252, top: 1961, left: 5 },
+    img: { w: 254, top: 1961, left: 5 },
     caption: { w: 108, top: 2095, left: 271, align: "left" },
   },
   {
     id: 10,
-    objectFit: "contain",
-    img: { w: 131, h: 261, top: 2243, left: 254 },
+    img: { w: 131, top: 2243, left: 254 },
     caption: { w: 110, top: 2350, left: 5, align: "right" },
   },
   {
     id: 11,
-    objectFit: "contain",
-    img: { w: 130, h: 261, top: 2243, left: 121 },
+    img: { w: 130, top: 2243, left: 121 },
     caption: null,
   },
   {
     id: 12,
-    objectFit: "cover",
-    img: { w: 276, h: 276, top: 2530, left: 0 },
+    img: { w: 276, top: 2530, left: 0 },
     caption: { w: 95, top: 2617, left: 295, align: "left" },
   },
   {
     id: 13,
-    objectFit: "cover",
-    img: { w: 286, h: 190, top: 2814, left: 88 },
+    img: { w: 286, top: 2814, left: 88 },
     caption: { w: 75, top: 2832, left: 8, align: "right" },
   },
   {
     id: 14,
-    objectFit: "cover",
-    img: { w: 281, h: 283, top: 3034, left: 11 },
+    img: { w: 281, top: 3034, left: 11 },
     caption: { w: 75, top: 3167, left: 306, align: "left" },
   },
 ];
@@ -387,8 +369,7 @@ export function HomePage(): JSX.Element {
                       left: mlp(item.img.left),
                       top: mtp(item.img.top),
                       width: mlp(item.img.w),
-                      height: mtp(item.img.h),
-                      objectFit: item.objectFit,
+                      height: "auto",
                     }}
                     onClick={() => openPreview(artIdx)}
                   />
@@ -455,12 +436,12 @@ export function HomePage(): JSX.Element {
                 src={artwork.smallSrc}
                 alt={artwork.alt}
                 loading="lazy"
-                className="absolute object-cover cursor-pointer"
+                className="absolute cursor-pointer"
                 style={{
                   left: dlp(artwork.img.left),
                   top: dtp(artwork.img.top),
                   width: dlp(artwork.img.w),
-                  height: dtp(artwork.img.h),
+                  height: "auto",
                 }}
                 onClick={() => openPreview(idx)}
               />
